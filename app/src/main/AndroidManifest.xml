@@ -21,12 +21,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
 
         <activity
             android:name=".ChatsActivity"
             android:label="@string/title_activity_chats"
             android:parentActivityName=".MainActivity">
 
+=======
+        <activity
+            android:name=".aboutActivity"
+            android:label="@string/title_activity_about"
+            android:theme="@style/AppTheme" >
+>>>>>>> anjali
         </activity>
     </application>
 

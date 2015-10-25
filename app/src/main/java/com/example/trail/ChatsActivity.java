@@ -1,5 +1,6 @@
 package com.example.trail;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 public class ChatsActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
@@ -55,22 +57,26 @@ public class ChatsActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_chats, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                if(drawerLayout!=null) {
-                    drawerLayout.openDrawer(GravityCompat.START);
-                }
-                return true;
+        int id  = item.getItemId();
+        if(id == android.R.id.home) {
+            if(drawerLayout!=null) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+            return true;
+        }
+        if(id == R.id.action_find_location){
+            Toast.makeText(getApplicationContext(), "Find your location", Toast.LENGTH_SHORT);
+            return true;
+        }
+        if(id == R.id.about){
+            Toast.makeText(getApplicationContext(), "About", Toast.LENGTH_SHORT);
+            Intent i = new Intent(this, aboutActivity.class);
         }
         return super.onOptionsItemSelected(item);
     }
