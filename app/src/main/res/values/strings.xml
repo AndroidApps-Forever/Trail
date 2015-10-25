@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Trail</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Settings</string>\
+    <string name="about_text">About</string>
+    <string name="edit_profile">Edit Profile</string>
 
     <string name="action_find_location">Find Location</string>
     <string name="action_menu">Menu</string>
@@ -15,5 +17,8 @@
     <string name="title_activity_chats">ChatsActivity</string>
 
     <string name="title_activity_about">aboutActivity</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+
 
 </resources>

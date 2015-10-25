@@ -4,12 +4,12 @@
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="25dp"
-    android:paddingRight="20dp"
+    android:paddingLeft="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_vertical_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_about" tools:context="com.example.trail.aboutActivity">
+    tools:showIn="@layout/activity_about" tools:context="com.example.trail.AboutActivity">
 
     <TextView
         android:id="@+id/title_about"
@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:text="Title"
         android:textAlignment="center"
-        android:textSize="50sp"/>
+        android:textSize="30sp"/>
 
     <TextView
         android:id="@+id/text_about"
@@ -26,7 +26,7 @@
         android:layout_above="@+id/title_about"
         android:layout_marginTop="10dp"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="10sp"
         android:text= "Text"/>
 
 
