@@ -19,6 +19,20 @@
     <string name="title_activity_about">aboutActivity</string>
     <string name="title_activity_settings">SettingsActivity</string>
 
+    <!-- Preference.xml -->
+    <string name="pref_sync">Sync Pref</string>
+    <string name="pref_sync_summ">Summary</string>
+    <string name="pref_syncConnectionType">Sync Connection Type</string>
+    <string-array name="pref_syncConnectionTypes_entries">
+        <item>Headings</item>
+        <item>Headings and Details</item>
+        <item>All Data</item>
+    </string-array>
+    <string-array name="pref_syncConnectionTypes_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 
 
 </resources>
