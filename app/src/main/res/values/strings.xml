@@ -18,6 +18,11 @@
 
     <string name="title_activity_about">aboutActivity</string>
     <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_new_group">NewGroup</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_add_members">AddMembers</string>
+    <string name="title_activity_new_chat">NewChat</string>
 
 
 
