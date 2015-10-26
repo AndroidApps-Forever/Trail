@@ -29,8 +29,7 @@ tools:context=".new_group">
     android:text="Add Image"
     android:id="@+id/adImg"
     android:layout_centerVertical="true"
-    android:layout_alignStart="@+id/imageView"
-    android:background="#F00"/>
+    android:layout_alignStart="@+id/imageView" />
 
 <EditText
     android:layout_width="200dp"
@@ -40,8 +39,7 @@ tools:context=".new_group">
     android:layout_alignLeft="@+id/adImg"
     android:layout_alignStart="@+id/adImg"
     android:layout_marginTop="44dp"
-    android:text="Group Name"
-    android:textColor="#F00"/>
+    android:text="Group Name" />
 
 <Button
     android:layout_width="fill_parent"
@@ -50,8 +48,7 @@ tools:context=".new_group">
     android:id="@+id/action_addMembers"
     android:layout_alignParentBottom="true"
     android:layout_alignParentStart="true"
-    android:layout_marginBottom="56dp"
-    android:background="#F00"/>
+    android:layout_marginBottom="56dp" />
 
     <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
         android:layout_width="fill_parent" android:layout_height="?attr/actionBarSizedp"
