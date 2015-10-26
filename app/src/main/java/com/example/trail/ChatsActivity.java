@@ -67,7 +67,7 @@ public class ChatsActivity extends AppCompatActivity {
                     Log.d("Item Click : ", menuItem.getTitle().toString());
                     Toast.makeText(getApplicationContext(), "About", Toast.LENGTH_SHORT);
                     drawerLayout.closeDrawers();
-                    Intent i = new Intent(ChatsActivity.this, AboutActivity.class);
+                    Intent i = new Intent(ChatsActivity.this, aboutActivity.class);
                     startActivity(i);
                     return true;
                 }
@@ -115,6 +115,11 @@ public class ChatsActivity extends AppCompatActivity {
                 drawerLayout.openDrawer(GravityCompat.START);
             }
             return true;
+        }
+        if(id == R.id.action_find_location){
+            Toast.makeText(getApplicationContext(), "Opening location", Toast.LENGTH_SHORT);
+            Intent i = new Intent(this, MapsActivity.class);
+            startActivity(i);
         }
         return super.onOptionsItemSelected(item);
     }

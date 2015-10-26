@@ -51,7 +51,7 @@ tools:context=".new_group">
     android:layout_marginBottom="56dp" />
 
     <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
-        android:layout_width="fill_parent" android:layout_height="?attr/actionBarSizedp"
+        android:layout_width="fill_parent" android:layout_height="fill_parent"
         android:background="?attr/colorPrimary" app:popupTheme="@style/AppTheme.PopupOverlay"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/view" />
