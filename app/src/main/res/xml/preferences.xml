@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference android:title="Your Name"
+        android:key="username"
+        android:summary="Please provide your username"
+        android:textColor="#000"/>
+    <CheckBoxPreference
+        android:key="pref_sync"
+        android:title="@string/pref_sync"
+        android:summary="@string/pref_sync_summ"
+        android:defaultValue="true"
+        android:textColor="#000"/>
+    <ListPreference
+        android:key="pref_syncConnectionType"
+        android:title="@string/pref_syncConnectionType"
+        android:dialogTitle="@string/pref_syncConnectionType"
+        android:entries="@array/pref_syncConnectionTypes_entries"
+        android:entryValues="@array/pref_syncConnectionTypes_values"
+        android:defaultValue="1"
+        android:textColor="#000"/>
+    <Preference android:title="Webpage">
+        <intent android:action="android.intent.action.VIEW"
+            android:data="https://github.com/AndroidApps-Forever/Trail"
+            android:textColor="#000"/>
+    </Preference>
+
+
+</PreferenceScreen>
