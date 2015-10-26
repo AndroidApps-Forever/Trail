@@ -4,7 +4,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.trail.NewChat">
+    tools:context="com.example.trail.NewChat"
+    android:id="@+id/nc">
 
     <Button
         android:layout_width="fill_parent"
@@ -15,7 +16,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="39dp"
         android:textColor="@color/abc_primary_text_material_dark"
-        android:textAppearance="@color/abc_primary_text_material_dark" />
+        android:textAppearance="@color/abc_primary_text_material_dark"
+        android:background="#F00"/>
 
     <ListView
         android:layout_width="match_parent"
@@ -25,11 +27,4 @@
         android:layout_alignParentBottom="true"></ListView>
 
 
-
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
 </RelativeLayout>
