@@ -116,6 +116,11 @@ public class ChatsActivity extends AppCompatActivity {
             }
             return true;
         }
+        if(id == R.id.action_find_location){
+            Toast.makeText(getApplicationContext(), "Opening location", Toast.LENGTH_SHORT);
+            Intent i = new Intent(this, MapsActivity.class);
+            startActivity(i);
+        }
         return super.onOptionsItemSelected(item);
     }
 }
