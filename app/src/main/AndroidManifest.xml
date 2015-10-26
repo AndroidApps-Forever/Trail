@@ -45,6 +45,20 @@
             android:theme="@style/AppTheme" >
         </activity>
 
+        <activity
+            android:name=".NewGroup"
+            android:label="@string/title_activity_new_group" >
+        </activity>
+        <activity
+            android:name=".AddMembers"
+            android:label="@string/title_activity_add_members" >
+        </activity>
+        <activity
+            android:name=".NewChat"
+            android:label="@string/title_activity_new_chat" >
+        </activity>
+
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -58,6 +72,7 @@
         <activity android:name=".GroupProfileActivity" >
         </activity>
         <activity android:name=".ChangeProfilePicture" >
+
         </activity>
         <activity
             android:name=".GroupchatActivity"
