@@ -27,7 +27,7 @@
             android:label="@string/title_activity_chats"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".AboutActivity"
+            android:name=".aboutActivity"
             android:label="@string/title_activity_about"
             android:theme="@style/AppTheme" >
         </activity>
@@ -35,6 +35,12 @@
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
             android:theme="@style/AppTheme" >
+        </activity>
+        <activity android:name=".MyProfileActivity" >
+        </activity>
+        <activity android:name=".GroupProfileActivity" >
+        </activity>
+        <activity android:name=".ChangeProfilePicture" >
         </activity>
     </application>
 
