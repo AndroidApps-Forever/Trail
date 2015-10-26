@@ -1,0 +1,54 @@
+﻿Merge branch 'master' into shambhavi
+
+Conflicts:
+	app/app.iml
+	app/src/main/AndroidManifest.xml
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch shambhavi
+# Your branch is up-to-date with 'origin/shambhavi'.
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	modified:   app/app.iml
+#	modified:   app/build.gradle
+#	new file:   app/src/debug/res/values/google_maps_api.xml
+#	modified:   app/src/main/AndroidManifest.xml
+#	new file:   app/src/main/java/com/example/trail/ChangeProfilePicture.java
+#	modified:   app/src/main/java/com/example/trail/ChatsActivity.java
+#	new file:   app/src/main/java/com/example/trail/CustomListAdapter.java
+#	new file:   app/src/main/java/com/example/trail/GroupProfileActivity.java
+#	modified:   app/src/main/java/com/example/trail/MainActivity.java
+#	new file:   app/src/main/java/com/example/trail/MapsActivity.java
+#	new file:   app/src/main/java/com/example/trail/MyProfileActivity.java
+#	new file:   app/src/main/java/com/example/trail/RoundImageView.java
+#	modified:   app/src/main/java/com/example/trail/SettingsActivity.java
+#	new file:   app/src/main/java/com/example/trail/SettingsFragment.java
+#	modified:   app/src/main/java/com/example/trail/aboutActivity.java
+#	new file:   app/src/main/res/drawable-xxhdpi/group.png
+#	new file:   app/src/main/res/drawable-xxhdpi/grppic.png
+#	new file:   app/src/main/res/drawable-xxhdpi/profilepic.png
+#	new file:   app/src/main/res/drawable-xxhdpi/profpic.png
+#	modified:   app/src/main/res/layout/activity_about.xml
+#	new file:   app/src/main/res/layout/activity_change_profile_picture.xml
+#	new file:   app/src/main/res/layout/activity_group_profile.xml
+#	new file:   app/src/main/res/layout/activity_maps.xml
+#	new file:   app/src/main/res/layout/activity_my_profile.xml
+#	modified:   app/src/main/res/layout/activity_new_group.xml
+#	modified:   app/src/main/res/layout/content_about.xml
+#	new file:   app/src/main/res/layout/content_maps.xml
+#	modified:   app/src/main/res/layout/content_settings.xml
+#	new file:   app/src/main/res/layout/mylist.xml
+#	modified:   app/src/main/res/values/strings.xml
+#	new file:   app/src/main/res/xml/preferences.xml
+#	new file:   app/src/release/res/values/google_maps_api.xml
+#
+
