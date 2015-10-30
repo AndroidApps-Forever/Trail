@@ -18,7 +18,7 @@ tools:context=".new_group">
 <ImageView
     android:layout_width="200dp"
     android:layout_height="200dp"
-    android:id="@+id/imageView"
+    android:id="@+id/grp_dp"
     android:background="@drawable/grpdp"
     android:layout_above="@+id/adImg"
     android:layout_centerHorizontal="true" />
@@ -29,7 +29,7 @@ tools:context=".new_group">
     android:text="Add Image"
     android:id="@+id/adImg"
     android:layout_centerVertical="true"
-    android:layout_alignStart="@+id/imageView" />
+    android:layout_alignStart="@+id/grp_dp" />
 
 <EditText
     android:layout_width="200dp"
@@ -51,9 +51,11 @@ tools:context=".new_group">
     android:layout_marginBottom="56dp" />
 
     <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
-        android:layout_width="fill_parent" android:layout_height="fill_parent"
+        android:layout_width="fill_parent" android:layout_height="50dp"
         android:background="?attr/colorPrimary" app:popupTheme="@style/AppTheme.PopupOverlay"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/view" />
+        android:layout_below="@+id/view"
+        android:layout_above="@+id/grp_dp"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>
 
