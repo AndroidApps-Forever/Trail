@@ -81,6 +81,10 @@
             android:name=".NewChatsActivity"
             android:label="@string/title_activity_new_chats" >
         </activity>
+        <activity
+            android:name=".NewPersonalActivity"
+            android:label="@string/title_activity_new_personal" >
+        </activity>
     </application>
 
 </manifest>

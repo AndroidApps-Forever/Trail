@@ -1,24 +1,22 @@
 package com.example.trail;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
-public class NewChatsActivity extends AppCompatActivity {
+public class NewPersonalActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_chats);
+        setContentView(R.layout.activity_new_personal);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_new_chats, menu);
+        getMenuInflater().inflate(R.menu.menu_new_personal, menu);
         return true;
     }
 
@@ -35,15 +33,5 @@ public class NewChatsActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void newpersonal(View view) {
-        Intent personalchat=new Intent(this,NewPersonalActivity.class);
-        startActivity(personalchat);
-    }
-
-    public void newgroup(View view) {
-        Intent groupchat=new Intent(this,NewGroup.class);
-        startActivity(groupchat);
     }
 }
