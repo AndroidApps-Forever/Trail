@@ -32,23 +32,24 @@ tools:context=".new_group">
     android:layout_alignStart="@+id/grp_dp" />
 
 <EditText
-    android:layout_width="200dp"
-    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:layout_height="35dp"
+    android:layout_marginTop="55dp"
     android:id="@+id/grpname"
+    android:backgroundTint="@color/wallet_hint_foreground_holo_light"
+    android:background="@color/wallet_highlighted_text_holo_light"
+    android:hint="Group Name"
     android:layout_below="@+id/adImg"
-    android:layout_alignLeft="@+id/adImg"
-    android:layout_alignStart="@+id/adImg"
-    android:layout_marginTop="44dp"
-    android:text="Group Name" />
+    android:layout_centerHorizontal="true" />
 
 <Button
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:text="Add Members"
     android:id="@+id/action_addMembers"
-    android:layout_alignParentBottom="true"
+    android:layout_below="@+id/grpname"
     android:layout_alignParentStart="true"
-    android:layout_marginBottom="56dp" />
+    android:layout_marginTop="30dp" />
 
     <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
         android:layout_width="fill_parent" android:layout_height="50dp"
