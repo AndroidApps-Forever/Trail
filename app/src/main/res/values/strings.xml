@@ -43,6 +43,7 @@
     <string name="title_activity_groupchat">GroupchatActivity</string>
     <string name="title_activity_privatechat">PrivatechatActivity</string>
     <string name="title_activity_new_chats">NewChatsActivity</string>
+    <string name="title_activity_new_personal">NewPersonalActivity</string>
 
 
 </resources>

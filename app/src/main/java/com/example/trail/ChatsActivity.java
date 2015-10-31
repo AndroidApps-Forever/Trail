@@ -123,7 +123,7 @@ public class ChatsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void newchats(){
+    public void newchats(View view){
         Intent newchatsdialog= new Intent(this, NewChatsActivity.class);
         startActivity(newchatsdialog);
     }
