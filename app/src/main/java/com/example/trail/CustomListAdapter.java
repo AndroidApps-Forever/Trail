@@ -39,7 +39,7 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         View rowView = inflater.inflate(R.layout.mylist, parent, false);
 
         TextView tv = (TextView) rowView.findViewById(R.id.Itemname);
-        ImageView img = (ImageView) rowView.findViewById(R.id.imageView);
+        ImageView img = (ImageView) rowView.findViewById(R.id.grp_dp);
 
         tv.setText(itemname[position]);
         img.setImageBitmap(getRoundedShape(decodeFile(context, imgid[position]), 200));
