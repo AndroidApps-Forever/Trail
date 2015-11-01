@@ -52,11 +52,6 @@
             android:name=".AddMembers"
             android:label="@string/title_activity_add_members" >
         </activity>
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
-
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" >
@@ -85,6 +80,9 @@
             android:name=".NewPersonalActivity"
             android:label="@string/title_activity_new_personal" >
         </activity>
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyBC9ekSvyUJzq_zfYrAtnOWTXhe6Aym2gQ"/>
     </application>
 
 </manifest>
