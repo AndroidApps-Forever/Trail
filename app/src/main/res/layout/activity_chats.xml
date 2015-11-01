@@ -44,9 +44,7 @@
             app:fabSize="normal"/>
 
     </android.support.design.widget.CoordinatorLayout>
-
-
-
+    
     <!--//Drawer Content-->
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation"
