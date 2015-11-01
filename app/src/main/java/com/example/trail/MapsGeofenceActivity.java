@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
+public class MapsGeofenceActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
 
     private GoogleMap mMap;
     private double latitude;
@@ -35,7 +35,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.activity_maps_geofence);
 
         if (mMap != null) {
             System.out.println("Enabling my the location");
@@ -129,7 +129,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                Toast.makeText(MapsActivity.this, "Latitude = " + p.lat + "\nLongitude = " + p.lng, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MapsGeofenceActivity.this, "Latitude = " + p.lat + "\nLongitude = " + p.lng, Toast.LENGTH_SHORT).show();
             }
         });
 

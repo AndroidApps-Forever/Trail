@@ -43,7 +43,7 @@ public class NewChatsActivity extends AppCompatActivity {
     }
 
     public void newgroup(View view) {
-        Intent groupchat=new Intent(this,NewGroup.class);
+        Intent groupchat=new Intent(this,NewGroupActivity.class);
         startActivity(groupchat);
     }
 }

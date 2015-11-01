@@ -11,6 +11,7 @@
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality. 
     -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
@@ -45,7 +46,7 @@
             android:theme="@style/AppTheme" >
         </activity>
         <activity
-            android:name=".NewGroup"
+            android:name=".NewGroupActivity"
             android:label="@string/title_activity_new_group" >
         </activity>
         <activity
@@ -53,7 +54,7 @@
             android:label="@string/title_activity_add_members" >
         </activity>
         <activity
-            android:name=".MapsActivity"
+            android:name=".MapsGeofenceActivity"
             android:label="@string/title_activity_maps" >
         </activity>
         <activity android:name=".MyProfileActivity" >
@@ -80,9 +81,16 @@
             android:name=".NewPersonalActivity"
             android:label="@string/title_activity_new_personal" >
         </activity>
+
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBC9ekSvyUJzq_zfYrAtnOWTXhe6Aym2gQ"/>
+            android:value="AIzaSyBC9ekSvyUJzq_zfYrAtnOWTXhe6Aym2gQ" />
+
+        <activity
+            android:name=".MapsChatActivity"
+            android:label="@string/title_activity_maps_chat"
+            android:theme="@style/AppTheme" >
+        </activity>
     </application>
 
 </manifest>

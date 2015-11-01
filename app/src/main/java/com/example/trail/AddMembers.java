@@ -1,12 +1,15 @@
 package com.example.trail;
 
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class AddMembers extends AppCompatActivity {
 
@@ -15,6 +18,15 @@ public class AddMembers extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_members);
        // getContactCursor(this ," ");
+
+        Button createGroup = (Button)findViewById(R.id.createGroup);
+        createGroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AddMembers.this,GroupchatActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     @Override

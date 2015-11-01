@@ -18,5 +18,10 @@
             android:id="@+id/about"
             android:icon="@drawable/ic_info_black"
             android:title="@string/about_text"/>
+        <item
+            android:id="@+id/createGeofence"
+            android:icon="@drawable/ic_action_geofence"
+            android:title="Create Geofence"/>
+        />
     </group>
 </menu>

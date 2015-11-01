@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class NewGroup extends AppCompatActivity {
+public class NewGroupActivity extends AppCompatActivity {
     int RESULT_LOAD_IMAGE;
 
     @Override
@@ -73,7 +73,7 @@ public class NewGroup extends AppCompatActivity {
 
             Toast.makeText(getApplicationContext(), "add members", Toast.LENGTH_SHORT);
 
-            Intent i = new Intent(NewGroup.this, AddMembers.class);
+            Intent i = new Intent(NewGroupActivity.this, AddMembers.class);
             startActivity(i);
             return true;
         }

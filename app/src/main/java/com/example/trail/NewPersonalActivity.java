@@ -1,16 +1,28 @@
 package com.example.trail;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class NewPersonalActivity extends AppCompatActivity {
-
+    Button startChatbtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_personal);
+
+        startChatbtn = (Button)findViewById(R.id.startChat);
+        startChatbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(NewPersonalActivity.this, PrivatechatActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     @Override
