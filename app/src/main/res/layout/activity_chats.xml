@@ -42,6 +42,7 @@
 
     </android.support.design.widget.CoordinatorLayout>
 
+    <!--<include layout="@layout/content_chats" />-->
     <!--//Drawer Content-->
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation"

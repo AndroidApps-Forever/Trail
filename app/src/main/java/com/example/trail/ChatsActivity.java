@@ -67,7 +67,7 @@ public class ChatsActivity extends AppCompatActivity {
                     Log.d("Item Click : ", menuItem.getTitle().toString());
                     Toast.makeText(getApplicationContext(), "About", Toast.LENGTH_SHORT);
                     drawerLayout.closeDrawers();
-                    Intent i = new Intent(ChatsActivity.this, aboutActivity.class);
+                    Intent i = new Intent(ChatsActivity.this, AboutActivity.class);
                     startActivity(i);
                     return true;
                 }
