@@ -18,6 +18,12 @@
 
     <string name="title_activity_about">aboutActivity</string>
     <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_new_group">NewGroup</string>
+
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_add_members">AddMembers</string>
+    <string name="title_activity_new_chat">NewChat</string>
 
     <!-- Preference.xml -->
     <string name="pref_sync">Sync Pref</string>
@@ -36,6 +42,8 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_groupchat">GroupchatActivity</string>
     <string name="title_activity_privatechat">PrivatechatActivity</string>
+    <string name="title_activity_new_chats">NewChatsActivity</string>
+    <string name="title_activity_new_personal">NewPersonalActivity</string>
 
 
 </resources>

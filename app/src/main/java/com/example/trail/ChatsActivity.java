@@ -45,17 +45,17 @@ public class ChatsActivity extends AppCompatActivity {
     private void setupNavigationView() {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.navigation);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener(){
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 int id = menuItem.getItemId();
-                if(id == R.id.edit_profile){
+                if (id == R.id.edit_profile) {
                     Log.d("Item Click : ", menuItem.getTitle().toString());
                     Toast.makeText(getApplicationContext(), "Edit Profile", Toast.LENGTH_SHORT);
                     drawerLayout.closeDrawers();
                     return true;
                 }
-                if(id == R.id.settings){
+                if (id == R.id.settings) {
                     Log.d("Item Click : ", menuItem.getTitle().toString());
                     Toast.makeText(getApplicationContext(), "Change Settings", Toast.LENGTH_SHORT);
                     drawerLayout.closeDrawers();
@@ -63,15 +63,14 @@ public class ChatsActivity extends AppCompatActivity {
                     startActivity(i);
                     return true;
                 }
-                if(id == R.id.about){
+                if (id == R.id.about) {
                     Log.d("Item Click : ", menuItem.getTitle().toString());
                     Toast.makeText(getApplicationContext(), "About", Toast.LENGTH_SHORT);
                     drawerLayout.closeDrawers();
                     Intent i = new Intent(ChatsActivity.this, AboutActivity.class);
                     startActivity(i);
                     return true;
-                }
-                else{
+                } else {
                     Toast.makeText(getApplicationContext(), "Activity not created yet", Toast.LENGTH_SHORT);
                     return false;
                 }
@@ -82,7 +81,7 @@ public class ChatsActivity extends AppCompatActivity {
         navHeader.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(),"Calling Header", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "Calling Header", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -122,5 +121,10 @@ public class ChatsActivity extends AppCompatActivity {
             startActivity(i);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void newchats(View view){
+        Intent newchatsdialog= new Intent(this, NewChatsActivity.class);
+        startActivity(newchatsdialog);
     }
 }
