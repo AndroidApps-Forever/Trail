@@ -14,15 +14,6 @@
     android:weightSum="1">
 
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:text="New Chat"
-        android:background="?attr/colorPrimary"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textAllCaps="true"
-        android:id="@+id/button3"
-        android:onClick="newchats"
-        android:layout_marginTop="475dp"/>
+
 
 </LinearLayout>

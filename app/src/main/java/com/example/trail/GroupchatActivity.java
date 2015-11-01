@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class GroupchatActivity extends AppCompatActivity {
+    Button btnMap, btnChat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,8 +19,8 @@ public class GroupchatActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Button btn = (Button)findViewById(R.id.mapBtn);
-        btn.setOnClickListener(new View.OnClickListener() {
+        btnMap = (Button)findViewById(R.id.mapBtn);
+        btnMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(GroupchatActivity.this, MapsActivity.class);
@@ -27,6 +28,14 @@ public class GroupchatActivity extends AppCompatActivity {
             }
         });
 
+        btnChat = (Button)findViewById(R.id.chatBtn1);
+        btnChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i1 = new Intent(GroupchatActivity.this, GroupchatActivity.class);
+                startActivity(i1);
+            }
+        });
     }
 
 }

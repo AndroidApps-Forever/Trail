@@ -6,13 +6,15 @@
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_privatechat"
-    tools:context="com.example.trail.PrivatechatActivity">
+    tools:context="com.example.mohini.myapplication.PrivatechatActivity">
 
     <TextView   android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dip"
         android:text = "Person Name: "
+        android:textColor="#000"
         android:textAppearance="?android:attr/textAppearanceLarge"/>
+
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -27,21 +29,72 @@
             android:onClick="onMap"
             android:text="MAP" />
 
+        <Button
+            android:id="@+id/chatBtn1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onChat"
+            android:text="CHAT" />
     </LinearLayout>
 
-    <EditText android:id="@+id/messageHistory"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:clickable="true"
-        android:layout_weight="1"
-        android:editable="false"
-        android:gravity="top"
-        android:scrollbars="vertical"
-        android:scrollbarSize="10px"        />
 
-    <LinearLayout android:orientation="horizontal"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="334dp" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/imageView1"
+            android:layout_alignParentRight="true"
+            android:text="Reciever's message" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sender's message"
+            android:layout_marginTop="80dp"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/imageView2" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher"
+            android:layout_alignTop="@+id/textView2"
+            android:layout_alignParentEnd="true" />
+
+        <EditText android:id="@+id/messageHistory"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:clickable="true"
+            android:layout_weight="1"
+            android:editable="false"
+            android:gravity="top"
+            android:scrollbars="vertical"
+            android:scrollbarSize="10px"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/imageView2"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="4">
 
         <EditText android:id="@+id/message"
