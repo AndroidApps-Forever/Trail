@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener {
 
-    private static final String TAG = "Error in Sign In Activity";
+    private static final String TAG = "Sign In error";
 
     private static final int RC_SIGN_IN = 0;
     private GoogleApiClient mGoogleApiClient;
@@ -133,6 +133,11 @@ public class MainActivity extends AppCompatActivity implements
         mGoogleApiClient.disconnect();
     }
 
+    @Override
+    protected void onDestroy(){
+        Log.e(TAG, "Application Destroyed");
+        super.onDestroy();
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
