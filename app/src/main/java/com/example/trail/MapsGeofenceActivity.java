@@ -16,6 +16,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.vision.barcode.Barcode;
@@ -126,6 +127,15 @@ public class MapsGeofenceActivity extends FragmentActivity implements OnMapReady
                     LatLng newLoc = new LatLng(latitude,longitude);
                     mMap.addMarker(new MarkerOptions().position(newLoc).title("New Delhi").snippet(userAddress));
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(newLoc));
+
+                    CircleOptions circleOptions = new CircleOptions()
+                            .center(newLoc).radius(geoFenceRadius)
+                            .fillColor(0x40ff0000)
+                            .strokeColor(Color.TRANSPARENT)
+                            .strokeWidth(2);
+
+                    //ADDING THE CIRCLE OF THE RESPECTIVE RADIUS ON THE MAP
+                    mMap.addCircle(circleOptions);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

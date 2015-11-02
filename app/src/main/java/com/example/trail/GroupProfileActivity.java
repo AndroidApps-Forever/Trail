@@ -26,7 +26,7 @@ public class GroupProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_group_profile);
+        setContentView(R.layout.content_group_profile);
 
         roundImageView=(ImageView)findViewById(R.id.imageView_round);
 
