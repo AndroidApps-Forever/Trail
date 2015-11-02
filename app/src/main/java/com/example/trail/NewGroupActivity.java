@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 public class NewGroupActivity extends AppCompatActivity {
     int RESULT_LOAD_IMAGE;
-
+    Button button , addMembersButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,12 +27,21 @@ public class NewGroupActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_new_group, menu);
-        final Button button = (Button) findViewById(R.id.adImg);
+       button = (Button) findViewById(R.id.adImg);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i, RESULT_LOAD_IMAGE);
+            }
+        });
+
+        addMembersButton = (Button) findViewById(R.id.action_addMembers);
+        addMembersButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent j = new Intent(NewGroupActivity.this, AddMembers.class);
+                startActivity(j);
             }
         });
         return true;
