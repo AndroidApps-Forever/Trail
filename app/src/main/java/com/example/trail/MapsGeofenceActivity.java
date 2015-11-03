@@ -54,9 +54,9 @@ public class MapsGeofenceActivity extends FragmentActivity implements OnMapReady
         mMap = googleMap;
         mMap.setOnMapLongClickListener(this);
         // Add a marker in Sydney and move the camera
-        LatLng delhi = new LatLng(28.6454415,77.0907573);
-        mMap.addMarker(new MarkerOptions().position(delhi).title("New Delhi").snippet("New Delhi"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(delhi));
+//        LatLng delhi = new LatLng(28.6454415,77.0907573);
+//        mMap.addMarker(new MarkerOptions().position(delhi).title("New Delhi").snippet("New Delhi"));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(delhi));
     }
 
 
@@ -109,7 +109,6 @@ public class MapsGeofenceActivity extends FragmentActivity implements OnMapReady
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 // TODO Auto-generated method stub
-                finish();
             }
         });
 

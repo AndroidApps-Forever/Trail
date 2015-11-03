@@ -38,7 +38,7 @@ public class NewChatsActivity extends AppCompatActivity {
     }
 
     public void newpersonal(View view) {
-        Intent personalchat=new Intent(this,NewPersonalActivity.class);
+        Intent personalchat=new Intent(this,ContactsActivity.class);
         startActivity(personalchat);
     }
 
