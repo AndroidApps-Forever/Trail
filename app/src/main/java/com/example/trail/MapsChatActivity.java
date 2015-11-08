@@ -100,12 +100,14 @@ public class MapsChatActivity extends FragmentActivity implements OnMapReadyCall
     @Override
     public void onConnected(Bundle bundle) {
         Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        if (location == null) {
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+        if(mMap != null) {
+            if (location == null) {
+                LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+            } else {
+                handleNewLocation(location);
+            }
+            ;
         }
-        else {
-            handleNewLocation(location);
-        };
     }
 
     private void handleNewLocation(Location location) {
