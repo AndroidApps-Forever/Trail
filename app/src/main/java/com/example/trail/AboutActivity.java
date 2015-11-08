@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
-public class aboutActivity extends AppCompatActivity {
+public class AboutActivity extends AppCompatActivity {
 
     TextView aboutTitle, aboutText;
     @Override

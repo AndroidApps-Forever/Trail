@@ -1,61 +1,35 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:paddingLeft="@dimen/activity_horizontal_margin"
-android:paddingRight="@dimen/activity_horizontal_margin"
-android:paddingTop="@dimen/activity_vertical_margin"
-android:paddingBottom="@dimen/activity_vertical_margin"
-tools:context=".new_group">
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    tools:context=".NewChatsActivity"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    >
 
-<android.support.design.widget.AppBarLayout android:layout_height="wrap_content"
-    android:layout_width="match_parent" android:theme="@style/AppTheme.AppBarOverlay"
-    android:id="@+id/view">
+    <android.support.design.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="match_parent" android:fitsSystemWindows="true">
 
-</android.support.design.widget.AppBarLayout>
+        <android.support.design.widget.AppBarLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+            <!--@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
 
-<ImageView
-    android:layout_width="200dp"
-    android:layout_height="200dp"
-    android:id="@+id/grp_dp"
-    android:background="@drawable/grpdp"
-    android:layout_above="@+id/adImg"
-    android:layout_centerHorizontal="true" />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+        </android.support.design.widget.AppBarLayout>
 
-<Button
-    android:layout_width="200dp"
-    android:layout_height="wrap_content"
-    android:text="Add Image"
-    android:id="@+id/adImg"
-    android:layout_centerVertical="true"
-    android:layout_alignStart="@+id/grp_dp" />
-
-<EditText
-    android:layout_width="200dp"
-    android:layout_height="wrap_content"
-    android:id="@+id/grpname"
-    android:layout_below="@+id/adImg"
-    android:layout_alignLeft="@+id/adImg"
-    android:layout_alignStart="@+id/adImg"
-    android:layout_marginTop="44dp"
-    android:text="Group Name" />
-
-<Button
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:text="Add Members"
-    android:id="@+id/action_addMembers"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentStart="true"
-    android:layout_marginBottom="56dp" />
-
-    <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
-        android:layout_width="fill_parent" android:layout_height="50dp"
-        android:background="?attr/colorPrimary" app:popupTheme="@style/AppTheme.PopupOverlay"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/view"
-        android:layout_above="@+id/grp_dp"
-        android:layout_alignParentEnd="true" />
-</RelativeLayout>
-
+        <include layout="@layout/content_new_group" />
+    </android.support.design.widget.CoordinatorLayout>
+</android.support.v4.widget.DrawerLayout>

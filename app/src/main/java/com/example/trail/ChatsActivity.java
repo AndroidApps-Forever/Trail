@@ -3,7 +3,6 @@ package com.example.trail;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -33,8 +32,10 @@ public class ChatsActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
+                Intent newchatsdialog = new Intent(ChatsActivity.this, NewChatsActivity.class);
+                startActivity(newchatsdialog);
             }
         });
 
@@ -45,17 +46,17 @@ public class ChatsActivity extends AppCompatActivity {
     private void setupNavigationView() {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.navigation);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener(){
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 int id = menuItem.getItemId();
-                if(id == R.id.edit_profile){
+                if (id == R.id.edit_profile) {
                     Log.d("Item Click : ", menuItem.getTitle().toString());
                     Toast.makeText(getApplicationContext(), "Edit Profile", Toast.LENGTH_SHORT);
                     drawerLayout.closeDrawers();
                     return true;
                 }
-                if(id == R.id.settings){
+                if (id == R.id.settings) {
                     Log.d("Item Click : ", menuItem.getTitle().toString());
                     Toast.makeText(getApplicationContext(), "Change Settings", Toast.LENGTH_SHORT);
                     drawerLayout.closeDrawers();
@@ -63,15 +64,21 @@ public class ChatsActivity extends AppCompatActivity {
                     startActivity(i);
                     return true;
                 }
-                if(id == R.id.about){
+                if (id == R.id.about) {
                     Log.d("Item Click : ", menuItem.getTitle().toString());
                     Toast.makeText(getApplicationContext(), "About", Toast.LENGTH_SHORT);
                     drawerLayout.closeDrawers();
-                    Intent i = new Intent(ChatsActivity.this, aboutActivity.class);
+                    Intent i = new Intent(ChatsActivity.this, AboutActivity.class);
                     startActivity(i);
                     return true;
                 }
-                else{
+                if (id == R.id.createGeofence){
+                    drawerLayout.closeDrawers();
+                    Intent i = new Intent(ChatsActivity.this, MapsGeofenceActivity.class);
+                    startActivity(i);
+                    return true;
+                }
+                else {
                     Toast.makeText(getApplicationContext(), "Activity not created yet", Toast.LENGTH_SHORT);
                     return false;
                 }
@@ -82,7 +89,7 @@ public class ChatsActivity extends AppCompatActivity {
         navHeader.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(),"Calling Header", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "Calling Header", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -94,7 +101,7 @@ public class ChatsActivity extends AppCompatActivity {
             setSupportActionBar(toolbar);
         }    // Show menu icon
         final ActionBar ab = getSupportActionBar();
-        ab.setHomeAsUpIndicator(R.drawable.ic_menu_white);
+        ab.setHomeAsUpIndicator(R.drawable.ic_menu_black);
         ab.setDisplayHomeAsUpEnabled(true);
     }
 
@@ -118,7 +125,7 @@ public class ChatsActivity extends AppCompatActivity {
         }
         if(id == R.id.action_find_location){
             Toast.makeText(getApplicationContext(), "Opening location", Toast.LENGTH_SHORT);
-            Intent i = new Intent(this, MapsActivity.class);
+            Intent i = new Intent(this, MapsChatActivity.class);
             startActivity(i);
         }
         return super.onOptionsItemSelected(item);
