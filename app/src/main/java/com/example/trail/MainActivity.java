@@ -3,6 +3,7 @@ package com.example.trail;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -27,11 +28,16 @@ public class MainActivity extends AppCompatActivity implements
 
     private boolean mIsResolving = false;
     private boolean mShouldResolve = false;
+    ViewPager viewPager;
+    CustomViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        viewPager=(ViewPager)findViewById(R.id.view_pager);
+        adapter = new CustomViewAdapter(this);
+        viewPager.setAdapter(adapter);
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
