@@ -88,14 +88,11 @@
             android:label="@string/title_activity_new_personal" >
         </activity>
 
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBoxqKn-8feNExVsg9LUIvlH4HqpZOSTlw" />
-        <!--
+
             <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyBC9ekSvyUJzq_zfYrAtnOWTXhe6Aym2gQ" />
-        -->
+
 
         <activity
             android:name=".MapsChatActivity"
@@ -129,3 +126,6 @@
     </application>
 
 </manifest>
+
+
+
