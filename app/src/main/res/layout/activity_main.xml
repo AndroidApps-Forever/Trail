@@ -22,7 +22,7 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager"
         android:layout_height="match_parent"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_above="@+id/sign_in_button">
     </android.support.v4.view.ViewPager>
 

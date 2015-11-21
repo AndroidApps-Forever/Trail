@@ -6,7 +6,9 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +23,15 @@ public class NewGroupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_group);
+        //android.support.v7.app.ActionBar actionBar ;
+        Toolbar toolbar;
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if(toolbar!=null) {
+            setSupportActionBar(toolbar);
+        }    // Show menu icon
+        final ActionBar ab = getSupportActionBar();
+        ab.setHomeButtonEnabled(true);
+        ab.setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -84,6 +95,12 @@ public class NewGroupActivity extends AppCompatActivity {
 
             Intent i = new Intent(NewGroupActivity.this, AddMembers.class);
             startActivity(i);
+            return true;
+        }
+        if(id== android.R.id.home)
+                //Write your logic here
+        {
+            this.finish();
             return true;
         }
 
