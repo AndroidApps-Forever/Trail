@@ -207,6 +207,7 @@ public class MapsGeofenceActivity extends AppCompatActivity implements OnMapRead
                 System.out.println("Point already had geofence");
                 marker.remove();
                 removeGeofencesHandler();
+                HOLDER.GEOFENCE_COUNT--;
                 return false;
             }
         });
@@ -217,7 +218,7 @@ public class MapsGeofenceActivity extends AppCompatActivity implements OnMapRead
     //  Clicked onlong click on map. Adds geofences, which sets alerts to be notified
     public void addGeofencesHandler() {
         if (!mLocationClient.isConnected()) {
-            Toast.makeText(this, getString(R.string.not_connected), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Not connected", Toast.LENGTH_SHORT).show();
             return;
         }
         try {
@@ -262,10 +263,7 @@ public class MapsGeofenceActivity extends AppCompatActivity implements OnMapRead
             // geofences enables the Add Geofences button.
             //setButtonsEnabledState();
 
-            Toast.makeText(
-                    this,
-                    getString(mGeofencesAdded ? R.string.geofences_added :
-                            R.string.geofences_removed),
+            Toast.makeText(this, getString(mGeofencesAdded ? R.string.geofences_added : R.string.geofences_removed),
                     Toast.LENGTH_SHORT
             ).show();
         } else {
