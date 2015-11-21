@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +29,15 @@ public class AddMembers extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        Toolbar toolbar;
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if(toolbar!=null) {
+            setSupportActionBar(toolbar);
+        }    // Show menu icon
+        final ActionBar ab = getSupportActionBar();
+        ab.setHomeButtonEnabled(true);
+        ab.setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -42,13 +53,21 @@ public class AddMembers extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id) {
+            case android.R.id.home:
+                //Write your logic here
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
 
-        return super.onOptionsItemSelected(item);
+        //noinspection SimplifiableIfStatement
+        //if (id == R.id.action_settings) {
+        //    return true;
+        //}
+
+        //return super.onOptionsItemSelected(item);
     }
     public static Cursor getContactCursor(ContentResolver contactHelper,
                                           String startsWith) {
