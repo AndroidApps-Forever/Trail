@@ -136,7 +136,6 @@ public class MapsGeofenceActivity extends AppCompatActivity implements OnMapRead
         mMap = googleMap;
         //New delhi
         LatLng point = new LatLng(28.607335730210824,77.21330847591162);
-        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
