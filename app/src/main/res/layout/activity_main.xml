@@ -16,15 +16,27 @@
         android:id="@+id/sign_in_button"
         android:background="@drawable/btn_google_signin_dark_focus"
         android:paddingLeft="80px"
-        android:layout_marginBottom="130dp"
+        android:layout_marginBottom="142dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager"
         android:layout_height="match_parent"
         android:layout_width="fill_parent"
-        android:layout_above="@+id/sign_in_button">
+        android:layout_above="@+id/sign_in_button"
+        android:layout_marginBottom="@dimen/activity_vertical_margin">
     </android.support.v4.view.ViewPager>
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="64dp"
+        android:layout_alignTop="@+id/sign_in_button"
+        android:layout_centerHorizontal="true"/>
+
 
 
 </RelativeLayout>

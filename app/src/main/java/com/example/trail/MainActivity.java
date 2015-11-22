@@ -10,11 +10,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.plus.Plus;
+import com.facebook.FacebookSdk;
+
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
@@ -30,11 +38,14 @@ public class MainActivity extends AppCompatActivity implements
     private boolean mShouldResolve = false;
     ViewPager viewPager;
     CustomViewAdapter adapter;
+    CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        callbackManager = CallbackManager.Factory.create();
         viewPager=(ViewPager)findViewById(R.id.view_pager);
         adapter = new CustomViewAdapter(this);
         viewPager.setAdapter(adapter);
@@ -44,10 +55,28 @@ public class MainActivity extends AppCompatActivity implements
                 .addOnConnectionFailedListener(this)
                 .addApi(Plus.API)
                 .addScope(new Scope(Scopes.PROFILE))
-                //.addScope(new Scope(Scopes.EMAIL))
                 .build();
 
+        LoginButton fbloginButton = (LoginButton) findViewById(R.id.login_button);
         findViewById(R.id.sign_in_button).setOnClickListener(this);
+
+        fbloginButton.setReadPermissions(Arrays.asList("user_profile"));
+        fbloginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                // App code
+            }
+
+            @Override
+            public void onCancel() {
+                // App code
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                // App code
+            }
+        });
 
     }
 
@@ -147,7 +176,9 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d(TAG, "onActivityResult:" + requestCode + ":" + resultCode + ":" + data);
+        //Log.d(TAG, "onActivityResult:" + requestCode + ":" + resultCode + ":" + data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+
 
         if (requestCode == RC_SIGN_IN) {
             // If the error resolution was not successful we should not resolve further.
