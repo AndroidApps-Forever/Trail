@@ -34,6 +34,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -45,6 +46,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Stack;
 
 public class MapsGeofenceActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener,
         ResultCallback<Status> , ConnectionCallbacks,
@@ -164,7 +166,8 @@ public class MapsGeofenceActivity extends AppCompatActivity implements OnMapRead
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    //public static Circle circle;
+    private Stack<Circle> circleStack = new Stack<Circle>();
 
     @Override
     public void onMapLongClick(LatLng point) {
@@ -192,7 +195,10 @@ public class MapsGeofenceActivity extends AppCompatActivity implements OnMapRead
                     .strokeWidth(2);
 
             //ADDING THE CIRCLE OF THE RESPECTIVE RADIUS ON THE MAP
-            mMap.addCircle(circleOptions);
+            Circle circle;
+            circle = mMap.addCircle(circleOptions);
+            circleStack.push(circle);
+
             //---- Calling add Geofence function ---------------------------------------------------------
             HOLDER.GEOFENCES.put("Geofence_" + count , point);
             addGeofencesHandler();
@@ -207,6 +213,8 @@ public class MapsGeofenceActivity extends AppCompatActivity implements OnMapRead
             public boolean onMarkerClick(Marker marker) {
                 System.out.println("Point already had geofence");
                 marker.remove();
+                Circle c = circleStack.pop();
+                c.remove();
                 removeGeofencesHandler();
                 return false;
             }
@@ -304,6 +312,7 @@ public class MapsGeofenceActivity extends AppCompatActivity implements OnMapRead
 
         // Add the geofences to be monitored by geofencing service.
         builder.addGeofences(mGeofenceList);
+        Toast.makeText(this, "Geofence added", Toast.LENGTH_SHORT).show();//------toast
 
         // Return a GeofencingRequest.
         return builder.build();
