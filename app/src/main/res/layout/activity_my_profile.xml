@@ -20,19 +20,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="33dp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Phone No."
-        android:layout_marginBottom="5dp"
-        android:textColor="@android:color/black"
-        android:id="@+id/textView2"
-        android:layout_alignTop="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="35dp" />
-
-    <TextView
+    <!-- <TextView
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -44,15 +32,25 @@
         android:layout_marginBottom="5dp"
         android:id="@+id/textView3"
         android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true" />-->
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:id="@+id/listView"
-        android:layout_below="@+id/textView3"
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        card_view:cardCornerRadius="4dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true" />
+        android:layout_below="@+id/textView"
+        android:layout_alignEnd="@+id/imageView_round" />
+    <!-- A RecyclerView with some commonly used attributes -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/my_recycler_view"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/textView" />
 
     <com.example.trail.RoundImageView
         android:id="@+id/imageView_round"
