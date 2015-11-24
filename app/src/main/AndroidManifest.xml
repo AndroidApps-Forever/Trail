@@ -91,9 +91,14 @@
 
             <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
+
+
             android:value="AIzaSyDUXyeA2bqqKqDbclzB00nFplqZ8SaeKkw" />
 
 
+           <!-- android:value="AIzaSyA7-7RORGd85e05dRfx5F58xpLccf91-s8"/> -->
+
+        <!-- android:value="AIzaSyDUXyeA2bqqKqDbclzB00nFplqZ8SaeKkw"-->
         <activity
             android:name=".MapsChatActivity"
             android:label="@string/title_activity_maps_chat"

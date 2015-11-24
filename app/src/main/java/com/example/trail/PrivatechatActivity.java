@@ -24,12 +24,15 @@ public class PrivatechatActivity extends AppCompatActivity {
         final ActionBar ab = getSupportActionBar();
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
+        //ab.setTitle("Mohini");
+
 
         btnMap = (Button)findViewById(R.id.mapBtn);
         btnMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(PrivatechatActivity.this, MapsGeofenceActivity.class);
+               // Intent i = new Intent(PrivatechatActivity.this,MyProfileActivity.class);
                 startActivity(i);
             }
         });
