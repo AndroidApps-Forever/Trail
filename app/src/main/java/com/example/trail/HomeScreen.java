@@ -1,8 +1,7 @@
 package com.example.trail;
 
-import android.app.ListActivity;
 import android.content.Intent;
-import android.database.Cursor;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,11 +15,23 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ChatsActivity extends AppCompatActivity {
+import com.example.trail.Adapters.HomeScreenListAdapter;
+import com.parse.FindCallback;
+import com.parse.LogInCallback;
+import com.parse.ParseAnonymousUtils;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class HomeScreen extends AppCompatActivity {
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
@@ -29,10 +40,23 @@ public class ChatsActivity extends AppCompatActivity {
 
     private SimpleCursorAdapter adapter;
 
+    //private ListView allChats;
+    private static final String TAG = ChatActivity.class.getName();
+    private static String sUserId;
+    private ArrayList<ParseUser> mUsers;
+
+    public static final String USER_ID_KEY = "userId";
+    private ListView lvChat;
+    HomeScreenListAdapter mAdapter;
+
+    private Handler handler = new Handler();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chats);
+        setContentView(R.layout.activity_homescreen);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -40,7 +64,7 @@ public class ChatsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
-                Intent newchatsdialog = new Intent(ChatsActivity.this, NewChatsActivity.class);
+                Intent newchatsdialog = new Intent(HomeScreen.this, NewChatsActivity.class);
                 startActivity(newchatsdialog);
             }
         });
@@ -48,6 +72,87 @@ public class ChatsActivity extends AppCompatActivity {
         setupNavigationView();
         setupToolbar();
 
+        if (ParseUser.getCurrentUser() != null) { // start with existing user
+            startWithCurrentUser();
+        } else { // If not logged in, login as a new anonymous user
+            login();
+        }
+
+    }
+
+    private void login() {
+        ParseAnonymousUtils.logIn(new LogInCallback() {
+            @Override
+            public void done(ParseUser user, ParseException e) {
+                if (e != null) {
+                    Log.d(TAG, "Anonymous login failed: " + e.toString());
+                } else {
+                    System.out.println(ParseUser.getCurrentUser().getObjectId());
+                    startWithCurrentUser();
+                }
+            }
+        });
+    }
+
+    private void startWithCurrentUser() {
+        sUserId = ParseUser.getCurrentUser().getObjectId();
+        setUpUserList();
+    }
+
+    private void setUpUserList() {
+        lvChat = (ListView) findViewById(R.id.lvChats);
+        mUsers = new ArrayList<ParseUser>();
+        receiveUser();
+        lvChat.setTranscriptMode(1);
+
+        mAdapter = new HomeScreenListAdapter(HomeScreen.this, sUserId, mUsers);
+        lvChat.setAdapter(mAdapter);
+        lvChat.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String rUserId = mUsers.get(position).getObjectId();
+                System.out.println(" Setting adapter");
+                System.out.println("receiver: " + rUserId);
+                Intent i = new Intent(HomeScreen.this, ChatActivity.class);
+                i.putExtra("Receiver_id", rUserId);
+                i.putExtra("Sender_id", sUserId);
+                startActivity(i);
+            }
+        });
+    }
+
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+        System.out.println("Refreshing user");
+        refreshUser();
+        handler.postDelayed(this, 1000);
+        }
+    };
+
+    private void refreshUser() {
+        receiveUser();
+    }
+    private void receiveUser() {
+        // Construct query to execute
+        ParseQuery<ParseUser> query = ParseQuery.getQuery(ParseUser.class);
+        System.out.println("Excuting query");
+        query.orderByDescending("updatedAt");
+        query.whereNotEqualTo("objectId", sUserId);
+        // Execute query to fetch all messages from Parse asynchronously
+        // This is equivalent to a SELECT query with SQL
+        query.findInBackground(new FindCallback<ParseUser>() {
+            public void done(List<ParseUser> users, ParseException e) {
+                if (e == null) {
+                    //mMessages.clear();
+                    System.out.println("Adding users");
+                    mUsers.addAll(users);
+                    mAdapter.notifyDataSetChanged(); // update adapter
+                } else {
+                    Log.d("message", "Error: " + e.getMessage());
+                }
+            }
+        });
     }
 
     private void setupNavigationView() {
@@ -67,7 +172,7 @@ public class ChatsActivity extends AppCompatActivity {
                     Log.d("Item Click : ", menuItem.getTitle().toString());
                     Toast.makeText(getApplicationContext(), "Change Settings", Toast.LENGTH_SHORT);
                     drawerLayout.closeDrawers();
-                    Intent i = new Intent(ChatsActivity.this, SettingsActivity.class);
+                    Intent i = new Intent(HomeScreen.this, SettingsActivity.class);
                     startActivity(i);
                     return true;
                 }
@@ -75,13 +180,13 @@ public class ChatsActivity extends AppCompatActivity {
                     Log.d("Item Click : ", menuItem.getTitle().toString());
                     Toast.makeText(getApplicationContext(), "About", Toast.LENGTH_SHORT);
                     drawerLayout.closeDrawers();
-                    Intent i = new Intent(ChatsActivity.this, AboutActivity.class);
+                    Intent i = new Intent(HomeScreen.this, AboutActivity.class);
                     startActivity(i);
                     return true;
                 }
                 if (id == R.id.createGeofence){
                     drawerLayout.closeDrawers();
-                    Intent i = new Intent(ChatsActivity.this, MapsGeofenceActivity.class);
+                    Intent i = new Intent(HomeScreen.this, MapsGeofenceActivity.class);
                     startActivity(i);
                     return true;
                 }
@@ -136,5 +241,15 @@ public class ChatsActivity extends AppCompatActivity {
             startActivity(i);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }
