@@ -19,7 +19,7 @@ public class NewPersonalActivity extends AppCompatActivity {
         startChatbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(NewPersonalActivity.this, PrivatechatActivity.class);
+                Intent i = new Intent(NewPersonalActivity.this, ChatActivity.class);
                 startActivity(i);
             }
         });

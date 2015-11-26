@@ -25,7 +25,7 @@ public class AddMembers extends AppCompatActivity {
         createGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(AddMembers.this,GroupchatActivity.class);
+                Intent i = new Intent(AddMembers.this,ContactsActivity.class);
                 startActivity(i);
             }
         });

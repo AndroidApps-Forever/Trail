@@ -35,8 +35,7 @@ public class ContactsActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Intent i = new Intent(ContactsActivity.this, PrivatechatActivity.class);
+                Intent i = new Intent(ContactsActivity.this, ChatActivity.class);
                 startActivity(i);
             }
         });
