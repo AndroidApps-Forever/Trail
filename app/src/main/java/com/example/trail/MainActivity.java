@@ -6,17 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -25,22 +17,12 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
-import com.parse.FindCallback;
 import com.parse.LogInCallback;
-import com.parse.ParseAnonymousUtils;
 import com.parse.ParseException;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
-
-import java.io.InputStream;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class MainActivity extends Activity implements View.OnClickListener, ConnectionCallbacks, OnConnectionFailedListener {
 
@@ -209,6 +191,8 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
                 editor.apply();
                 // I check in the data base if(my email id of user exist in data base)
                 checkUser();
+//                Intent intent = new Intent(this, HomeScreen.class);
+//                startActivity(intent);
 
             } else {
                 Toast.makeText(getApplicationContext(),
@@ -232,18 +216,19 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
             //signIn to get the current user
             // Retrieve the text entered from the EditText
             usernametxt = personName;
-            passwordtxt = "Password";
-
+            passwordtxt = "password";
+            System.out.println("userName: " + usernametxt);
             // Send data to Parse.com for verification
             ParseUser.logInInBackground(usernametxt, passwordtxt,
                     new LogInCallback() {
                         public void done(ParseUser user, ParseException e) {
+                            System.out.println("user: " + user);
+                            //System.out.println("exception: " + e.toString());
                             if (user != null) {
+                                sUserId = ParseUser.getCurrentUser().getObjectId();
+                                System.out.println("Current User Id: " + sUserId);
                                 // If user exist and authenticated, send user to Welcome.class
-                                Intent intent = new Intent(
-                                        MainActivity.this,
-                                        HomeScreen.class);
-                                startActivity(intent);
+                                login();
                                 Toast.makeText(getApplicationContext(),
                                         "Successfully Logged in",
                                         Toast.LENGTH_LONG).show();
@@ -251,7 +236,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
                             } else {
                                 Toast.makeText(
                                         getApplicationContext(),
-                                        "No such user exist, please signup",
+                                        e.toString(),
                                         Toast.LENGTH_LONG).show();
                                 createNewUser();
                             }
@@ -261,12 +246,11 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
     }
 
     private void createNewUser() {
-        String id = currentPerson.getId();
+        System.out.println("Creating new user");
         ParseUser user = new ParseUser();
         user.setUsername(personName);
         user.setEmail(email);
-        user.setPassword("Halluleya");
-        user.setObjectId(id);
+        user.setPassword("password");
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
                 if (e == null) {
@@ -274,34 +258,30 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
                     Toast.makeText(getApplicationContext(),
                             "Successfully Signed up.",
                             Toast.LENGTH_LONG).show();
+                    login();
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Sign up Error", Toast.LENGTH_LONG)
                             .show();
+                    signOutFromGplus();
                 }
             }
         });
     }
 
-    private void startWithCurrentUser() {
-        //KLLmVL886h
-        sUserId = ParseUser.getCurrentUser().getObjectId();
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putString("sUserId", sUserId);
-        editor.commit();
-    }
+//    private void startWithCurrentUser() {
+//        //KLLmVL886h
+//        sUserId = ParseUser.getCurrentUser().getObjectId();
+//        SharedPreferences.Editor editor = sp.edit();
+//        editor.putString("sUserId", sUserId);
+//        editor.commit();
+//    }
 
     private void login() {
-        ParseAnonymousUtils.logIn(new LogInCallback() {
-            @Override
-            public void done(ParseUser user, ParseException e) {
-                if (e != null) {
-                    Log.d(TAG, "Anonymous login failed: " + e.toString());
-                } else {
-                    System.out.println(ParseUser.getCurrentUser().getObjectId());
-                    startWithCurrentUser();
-                }
-            }
-        });
+        //KLLmVL886h
+        Intent intent = new Intent(
+                MainActivity.this,
+                HomeScreen.class);
+        startActivity(intent);
     }
 }

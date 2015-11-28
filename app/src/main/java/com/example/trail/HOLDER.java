@@ -25,6 +25,8 @@ public final class HOLDER {
 
     public static Person user;
 
+    public static String sUserId;
+
     /* Expiration in Days -----  7 days */
     public static final long GEOFENCE_EXPIRATION_IN_DAYS = 7;
     /*Expiration in Hours */

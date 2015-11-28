@@ -1,11 +1,14 @@
 package com.example.trail;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -46,11 +49,20 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        Toolbar toolbar;
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if(toolbar!=null) {
+            setSupportActionBar(toolbar);
+        }    // Show menu icon
+        final ActionBar ab = getSupportActionBar();
+        ab.setHomeButtonEnabled(true);
+        ab.setDisplayHomeAsUpEnabled(true);
+
         Intent i = getIntent();
         rUserId = i.getStringExtra("Receiver_id");
-        sUserId = i.getStringExtra("Sender_id");
+        ab.setTitle(i.getStringExtra("UserName"));
+
+        sUserId = HOLDER.sUserId;
         //System.out.println(rUserId + " " + sUserId);
         users[0] = rUserId;
         users[1] = sUserId;
@@ -58,6 +70,20 @@ public class ChatActivity extends AppCompatActivity {
         receiveMessage();
         // Run the runnable object defined every 100ms
         handler.postDelayed(runnable, 1000);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case android.R.id.home:
+                //Write your logic here
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void startWithCurrentUser() {
@@ -96,6 +122,7 @@ public class ChatActivity extends AppCompatActivity {
                         }
                     });
                     etMessage.setText("");
+                    etMessage.setTextColor(Color.BLACK);
                 }
             }
         });

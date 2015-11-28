@@ -60,7 +60,7 @@ public class NewChatsActivity extends AppCompatActivity {
 
 
     public void newpersonal(View view) {
-        Intent personalchat=new Intent(this,ContactsActivity.class);
+        Intent personalchat=new Intent(this,FetchAllContacts.class);
         startActivity(personalchat);
     }
 
