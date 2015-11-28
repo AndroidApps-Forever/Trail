@@ -23,20 +23,7 @@
         android:layout_marginTop="60dp"
         android:layout_marginBottom="10dp"/>
 
-    <!--<Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign In"
-        android:background="@drawable/btn_google_signin_dark_focus"
-        android:paddingLeft="80px"
-        android:layout_marginBottom="130dp"
-        android:layout_alignParentBottom="true"
-<<<<<<< HEAD
-        android:layout_centerHorizontal="true" />-->
 
-
-=======
-        android:layout_centerHorizontal="true" />
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager"
         android:layout_height="match_parent"
@@ -45,7 +32,5 @@
         android:layout_alignParentStart="true"
         android:layout_above="@+id/sign_in_button">
     </android.support.v4.view.ViewPager>
->>>>>>> 6b5fe74358f62cd3329d8f71308650a54667ec03
-
 
 </RelativeLayout>

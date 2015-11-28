@@ -53,7 +53,7 @@ public class HomeScreenListAdapter extends ArrayAdapter {
         final boolean isMe = users.get(position).getObjectId().equals(mUserId);
 
         if (!isMe) {
-            System.out.println("here its taking time");
+            //System.out.println("here its taking time");
             holder.imageLeft.setVisibility(View.VISIBLE);
             holder.userName.setText(name);
             holder.userName.setGravity(Gravity.TOP | Gravity.LEFT);
