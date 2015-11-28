@@ -21,6 +21,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.trail.Adapters.HomeScreenListAdapter;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
+import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.plus.Plus;
 import com.parse.FindCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseAnonymousUtils;
@@ -31,7 +39,9 @@ import com.parse.ParseUser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeScreen extends AppCompatActivity {
+public class HomeScreen extends AppCompatActivity implements View.OnClickListener,
+        ConnectionCallbacks, OnConnectionFailedListener, ResultCallback<Status>
+{
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
@@ -44,6 +54,8 @@ public class HomeScreen extends AppCompatActivity {
     private static final String TAG = ChatActivity.class.getName();
     private static String sUserId;
     private ArrayList<ParseUser> mUsers;
+    private GoogleApiClient mGoogleApiClient ;
+    boolean mSignOutClicked;
 
     public static final String USER_ID_KEY = "userId";
     private ListView lvChat;
@@ -62,22 +74,29 @@ public class HomeScreen extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
                 Intent newchatsdialog = new Intent(HomeScreen.this, NewChatsActivity.class);
                 startActivity(newchatsdialog);
             }
         });
-
+        buildGoogleApiClient();
         setupNavigationView();
         setupToolbar();
 
         if (ParseUser.getCurrentUser() != null) { // start with existing user
             startWithCurrentUser();
-        } else { // If not logged in, login as a new anonymous user
+        }/* else { // If not logged in, login as a new anonymous user
             login();
-        }
+        }*/
 
+        //handler.postDelayed(runnable, 100);
+    }
+
+    private void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
     }
 
     private void login() {
@@ -96,12 +115,13 @@ public class HomeScreen extends AppCompatActivity {
 
     private void startWithCurrentUser() {
         sUserId = ParseUser.getCurrentUser().getObjectId();
+        System.out.println("Current User Id: " + sUserId);
         setUpUserList();
     }
 
     private void setUpUserList() {
         lvChat = (ListView) findViewById(R.id.lvChats);
-        mUsers = new ArrayList<ParseUser>();
+        mUsers = new ArrayList<>();
         receiveUser();
         lvChat.setTranscriptMode(1);
 
@@ -121,14 +141,14 @@ public class HomeScreen extends AppCompatActivity {
         });
     }
 
-    private Runnable runnable = new Runnable() {
+    /*private Runnable runnable = new Runnable() {
         @Override
         public void run() {
         System.out.println("Refreshing user");
         refreshUser();
-        handler.postDelayed(this, 1000);
+        //handler.postDelayed(this, 1000);
         }
-    };
+    };*/
 
     private void refreshUser() {
         receiveUser();
@@ -162,7 +182,7 @@ public class HomeScreen extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 int id = menuItem.getItemId();
-                if (id == R.id.edit_profile) {
+                /*if (id == R.id.edit_profile) {
                     Log.d("Item Click : ", menuItem.getTitle().toString());
                     Toast.makeText(getApplicationContext(), "Edit Profile", Toast.LENGTH_SHORT);
                     drawerLayout.closeDrawers();
@@ -175,13 +195,13 @@ public class HomeScreen extends AppCompatActivity {
                     Intent i = new Intent(HomeScreen.this, SettingsActivity.class);
                     startActivity(i);
                     return true;
-                }
+                }*/
                 if (id == R.id.about) {
                     Log.d("Item Click : ", menuItem.getTitle().toString());
-                    Toast.makeText(getApplicationContext(), "About", Toast.LENGTH_SHORT);
-                    drawerLayout.closeDrawers();
+                    Toast.makeText(getApplicationContext(), "About", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(HomeScreen.this, AboutActivity.class);
                     startActivity(i);
+                    drawerLayout.closeDrawers();
                     return true;
                 }
                 if (id == R.id.createGeofence){
@@ -190,8 +210,18 @@ public class HomeScreen extends AppCompatActivity {
                     startActivity(i);
                     return true;
                 }
+                if(id == R.id.sign_out){
+                    System.out.println("Logout");
+                    Toast.makeText(getApplicationContext(), "Clicked on logout", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(HomeScreen.this, MainActivity.class);
+                    startActivity(i);
+                    //mGoogleApiClient.connect();
+                    System.err.println("LOG OUT ^^^^^^^^^ SUCESS");
+                    drawerLayout.closeDrawers();
+                    return true;
+                }
                 else {
-                    Toast.makeText(getApplicationContext(), "Activity not created yet", Toast.LENGTH_SHORT);
+                    Toast.makeText(getApplicationContext(), "Activity not created yet", Toast.LENGTH_SHORT).show();
                     return false;
                 }
             }
@@ -213,13 +243,14 @@ public class HomeScreen extends AppCompatActivity {
             setSupportActionBar(toolbar);
         }    // Show menu icon
         final ActionBar ab = getSupportActionBar();
+        assert ab != null;
         ab.setHomeAsUpIndicator(R.drawable.ic_menu_black);
         ab.setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_chats, menu);
+        getMenuInflater().inflate(R.menu.menu_homescreen, menu);
         return true;
     }
 
@@ -229,14 +260,14 @@ public class HomeScreen extends AppCompatActivity {
 
         System.out.println("ID" + id);
         if(id == android.R.id.home) {
-            Toast.makeText(getApplicationContext(), "Drawer Open", Toast.LENGTH_SHORT);
+            Toast.makeText(getApplicationContext(), "Drawer Open", Toast.LENGTH_SHORT).show();
             if(drawerLayout!=null) {
                 drawerLayout.openDrawer(GravityCompat.START);
             }
             return true;
         }
         if(id == R.id.action_find_location){
-            Toast.makeText(getApplicationContext(), "Opening location", Toast.LENGTH_SHORT);
+            Toast.makeText(getApplicationContext(), "Opening location", Toast.LENGTH_SHORT).show();
             Intent i = new Intent(this, MapsChatActivity.class);
             startActivity(i);
         }
@@ -251,5 +282,32 @@ public class HomeScreen extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+        mSignOutClicked = false;
+        Log.i(TAG, "Connected to GoogleApiClient");
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        mGoogleApiClient.connect();
+        Log.i(TAG, "Connection suspended");
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onResult(Status status) {
+
     }
 }

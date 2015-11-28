@@ -1,4 +1,4 @@
-package com.example.trail;
+package com.example.trail.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.trail.R;
 
 /**
  * Created by Shrabanti on 26-10-2015.

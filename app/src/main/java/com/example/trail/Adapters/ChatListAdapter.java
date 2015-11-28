@@ -1,4 +1,4 @@
-package com.example.trail;
+package com.example.trail.Adapters;
 
 import android.content.Context;
 import android.view.Gravity;
@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.trail.Message;
+import com.example.trail.R;
 import com.squareup.picasso.Picasso;
 
 import java.math.BigInteger;

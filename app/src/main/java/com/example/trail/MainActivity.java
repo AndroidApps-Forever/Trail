@@ -2,12 +2,15 @@ package com.example.trail;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,22 +27,37 @@ import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.Geofence;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
+import com.parse.FindCallback;
+import com.parse.LogInCallback;
+import com.parse.ParseAnonymousUtils;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 import java.io.InputStream;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class MainActivity extends Activity implements View.OnClickListener, ConnectionCallbacks, OnConnectionFailedListener {
 
-    private static final int RC_SIGN_IN =0;
+    private static final int RC_SIGN_IN = 0;
     private static final String TAG = "MainActivity";
 
     private GoogleApiClient mGoogleApiClient;
-    Bundle b = new Bundle();
+    //Bundle b = new Bundle();
+    SharedPreferences sp;
 
     private boolean mSignInClicked;
 
     private ConnectionResult mConnectionResult;
+    String sUserId;
+    Person currentPerson;
+    String personName, personPhotoUrl, personGooglePlusProfile, email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +73,9 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this).addApi(Plus.API)
                 .addScope(Plus.SCOPE_PLUS_LOGIN).build();
-        System.out.println("I am done with creation");
-
+        sp = getSharedPreferences(HOLDER.SHARED_PREFERENCES_NAME, Context.MODE_APPEND);
     }
+
 
     protected void onStart() {
         Log.v(TAG, "Start");
@@ -72,30 +90,19 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
             mGoogleApiClient.disconnect();
         }
     }
+
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         Log.e(TAG, "Application Destroyed");
         super.onDestroy();
     }
+
     @Override
     public void onConnected(Bundle bundle) {
-        String email = Plus.AccountApi.getAccountName(mGoogleApiClient);
-        if(email.endsWith("@iiitd.ac.in")) {
-            Toast.makeText(this, "User is connected, Yay!", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(MainActivity.this, HomeScreen.class);
 
-            // Get user's information
-            getProfileInformation();
-            intent.putExtras(b);
-            startActivity(intent);
-            mSignInClicked = false;
-        }
-        else {
-            Toast.makeText(this, "Not a IIITD ID", Toast.LENGTH_LONG).show();
-            mGoogleApiClient.disconnect();
-            //mSignInClicked = false;
-            resolveSignInError();
-        }
+        Toast.makeText(this, "User is connected, Yay!", Toast.LENGTH_LONG).show();
+        setProfileInformation();
+        mSignInClicked = false;
     }
 
 
@@ -113,8 +120,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
             System.out.println("We're going to give error dialog.");
             GooglePlayServicesUtil.getErrorDialog(result.getErrorCode(), this,
                     0).show();
-        }
-        else {
+        } else {
             // Store the ConnectionResult for later usage
             mConnectionResult = result;
 
@@ -125,8 +131,9 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
             }
         }
     }
+
     @Override
-    protected void onActivityResult(int requestCode, int responseCode,Intent intent) {
+    protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
         //System.out.println("Hello");
         Log.v(TAG, "ActivityResult: " + requestCode);
         if ((requestCode == RC_SIGN_IN) && (responseCode == RESULT_OK)) {
@@ -155,6 +162,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
             Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
             mGoogleApiClient.disconnect();
         }
+        System.out.println("Logout!");
     }
 
     private void signInWithGplus() {
@@ -166,36 +174,44 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
     }
 
     private void resolveSignInError() {
-        System.out.println("Mconnection result " + mConnectionResult);
+        System.out.println("M connection result " + mConnectionResult);
         if (mConnectionResult.hasResolution()) {
-
+            System.out.println("Here1");
             try {
 
                 mConnectionResult.startResolutionForResult(this, RC_SIGN_IN);
             } catch (IntentSender.SendIntentException e) {
-
+                System.out.println("Here2");
                 mGoogleApiClient.connect();
             }
         }
     }
 
-    public void getProfileInformation() {
+    public void setProfileInformation() {
         try {
             if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
-                Person currentPerson = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
-                String personName = currentPerson.getDisplayName();
-                String personPhotoUrl = currentPerson.getImage().getUrl();
-                String personGooglePlusProfile = currentPerson.getUrl();
-                String email = Plus.AccountApi.getAccountName(mGoogleApiClient);
+                currentPerson = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
+                personName = currentPerson.getDisplayName();
+                personPhotoUrl = currentPerson.getImage().getUrl();
+                personGooglePlusProfile = currentPerson.getUrl();
 
+                email = Plus.AccountApi.getAccountName(mGoogleApiClient);
+
+                HOLDER.user = currentPerson;
                 Log.e(TAG, "Name: " + personName + ", plusProfile: "
                         + personGooglePlusProfile + ", email: " + email
                         + ", Image: " + personPhotoUrl);
-                /*Holder.USER_NAME = personName;
-                Holder.EMAIL_ID = email;*/
-                b.putString("txtName", personName);
-                b.putString("txtEmail", email);
-                b.putString("txtURL", personPhotoUrl );
+                SharedPreferences.Editor editor = sp.edit();
+                System.out.println("currentPerson" + currentPerson.toString());
+                // ----------------Putting in shared preference.
+                editor.putString("personName", personName);
+                editor.putString("photoUrl", personPhotoUrl);
+                editor.putString("profile", personGooglePlusProfile);
+                editor.putString("currentEmail", email);
+                editor.apply();
+                signOutFromGplus();
+                // I check in the data base if(my email id of user exist in data base)
+                checkUser();
 
             } else {
                 Toast.makeText(getApplicationContext(),
@@ -206,5 +222,77 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
         }
     }
 
+    private void checkUser() {
+        //check if there already is a user
+        String usernametxt, passwordtxt;
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser != null) {
+            //if there is a current user.
+            Intent intent = new Intent(MainActivity.this, HomeScreen.class);
+            startActivity(intent);
+            finish();
+        } else {
+            //signIn to get the current user
+            // Retrieve the text entered from the EditText
+            usernametxt = personName;
+            passwordtxt = "password";
+            System.out.println("userName: " + usernametxt);
+            // Send data to Parse.com for verification
+            ParseUser.logInInBackground(usernametxt, passwordtxt,
+                    new LogInCallback() {
+                        public void done(ParseUser user, ParseException e) {
+                            System.out.println("user: " + user);
+                            //System.out.println("exception: " + e.toString());
+                            if (user != null) {
+                                sUserId = ParseUser.getCurrentUser().getObjectId();
+                                System.out.println("Current User Id: " + sUserId);
+                                // If user exist and authenticated, send user to Welcome.class
+                                login();
+                                Toast.makeText(getApplicationContext(),
+                                        "Successfully Logged in",
+                                        Toast.LENGTH_LONG).show();
+                                finish();
+                            } else {
+                                Toast.makeText(
+                                        getApplicationContext(),
+                                        e.toString(),
+                                        Toast.LENGTH_LONG).show();
+                                        createNewUser();
+                            }
+                        }
+                    });
+        }
+    }
 
+    private void createNewUser() {
+        System.out.println("Creating new user");
+        ParseUser user = new ParseUser();
+        user.setUsername(personName);
+        user.setEmail(email);
+        user.setPassword("password");
+        user.signUpInBackground(new SignUpCallback() {
+            public void done(ParseException e) {
+                if (e == null) {
+                    // Show a simple Toast message upon successful registration
+                    Toast.makeText(getApplicationContext(),
+                            "Successfully Signed up.",
+                            Toast.LENGTH_LONG).show();
+                    login();
+                } else {
+                    Toast.makeText(getApplicationContext(),
+                            "Sign up Error", Toast.LENGTH_LONG)
+                            .show();
+                    signOutFromGplus();
+                }
+            }
+        });
+    }
+
+    private void login() {
+        //KLLmVL886h
+        Intent intent = new Intent(
+                MainActivity.this,
+                HomeScreen.class);
+        startActivity(intent);
+    }
 }
