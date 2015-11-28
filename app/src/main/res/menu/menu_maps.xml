@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MapsChatActivity">
+
+    <item
+        android:id="@+id/action_find_location"
+        android:orderInCategory="101"
+        android:title="@string/action_find_location"
+        android:icon="@drawable/ic_action_location_found_dark"
+        app:showAsAction="always"
+        android:enabled="false"/>
+    <item
+        android:id="@+id/action_chat"
+        android:orderInCategory="102"
+        android:title="Chat"
+        android:icon="@drawable/ic_action_chat_white"
+        app:showAsAction="always" />
+
+
+</menu>

@@ -87,6 +87,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         setupNavigationView();
         setupToolbar();
 
+<<<<<<< HEAD
         if (ParseUser.getCurrentUser() != null) {
          // start with existing user
             startWithCurrentUser();
@@ -94,6 +95,13 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 // else { // If not logged in, login as a new anonymous user
 //            login();
 //        }
+=======
+        if (ParseUser.getCurrentUser() != null) { // start with existing user
+            startWithCurrentUser();
+        }/* else { // If not logged in, login as a new anonymous user
+            login();
+        }*/
+>>>>>>> f5545e5185bb1805ac98a8807db409fc2fb0004c
 
         //handler.postDelayed(runnable, 100);
     }
@@ -122,8 +130,12 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
     private void startWithCurrentUser() {
         sUserId = ParseUser.getCurrentUser().getObjectId();
+<<<<<<< HEAD
         HOLDER.sUserId = sUserId;
         //Call NewChatsActivity.java
+=======
+        System.out.println("Current User Id: " + sUserId);
+>>>>>>> f5545e5185bb1805ac98a8807db409fc2fb0004c
         setUpUserList();
     }
 
@@ -244,7 +256,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 int id = menuItem.getItemId();
-                if (id == R.id.edit_profile) {
+                /*if (id == R.id.edit_profile) {
                     Log.d("Item Click : ", menuItem.getTitle().toString());
                     Toast.makeText(getApplicationContext(), "Edit Profile", Toast.LENGTH_SHORT);
                     drawerLayout.closeDrawers();
@@ -257,13 +269,13 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                     Intent i = new Intent(HomeScreen.this, SettingsActivity.class);
                     startActivity(i);
                     return true;
-                }
+                }*/
                 if (id == R.id.about) {
                     Log.d("Item Click : ", menuItem.getTitle().toString());
                     Toast.makeText(getApplicationContext(), "About", Toast.LENGTH_SHORT).show();
-                    drawerLayout.closeDrawers();
                     Intent i = new Intent(HomeScreen.this, AboutActivity.class);
                     startActivity(i);
+                    drawerLayout.closeDrawers();
                     return true;
                 }
                 if (id == R.id.createGeofence){
@@ -275,14 +287,10 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 if(id == R.id.sign_out){
                     System.out.println("Logout");
                     Toast.makeText(getApplicationContext(), "Clicked on logout", Toast.LENGTH_SHORT).show();
-                    if (mGoogleApiClient.isConnected()) {
-                        Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
-                        mGoogleApiClient.disconnect();
-                        mGoogleApiClient.connect();
-                        System.err.println("LOG OUT ^^^^^^^^^ SUCESS");
-                        finish();
-                    }
-                    System.out.println("");
+                    Intent i = new Intent(HomeScreen.this, MainActivity.class);
+                    startActivity(i);
+                    //mGoogleApiClient.connect();
+                    System.err.println("LOG OUT ^^^^^^^^^ SUCESS");
                     drawerLayout.closeDrawers();
                     return true;
                 }
@@ -316,7 +324,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_chats, menu);
+        getMenuInflater().inflate(R.menu.menu_homescreen, menu);
         return true;
     }
 

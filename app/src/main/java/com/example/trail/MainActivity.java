@@ -17,6 +17,12 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
+<<<<<<< HEAD
+=======
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.Geofence;
+>>>>>>> f5545e5185bb1805ac98a8807db409fc2fb0004c
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 import com.parse.LogInCallback;
@@ -143,6 +149,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
             Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
             mGoogleApiClient.disconnect();
         }
+        System.out.println("Logout!");
     }
 
     private void signInWithGplus() {
@@ -189,6 +196,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
                 editor.putString("profile", personGooglePlusProfile);
                 editor.putString("currentEmail", email);
                 editor.apply();
+                signOutFromGplus();
                 // I check in the data base if(my email id of user exist in data base)
                 checkUser();
 //                Intent intent = new Intent(this, HomeScreen.class);
@@ -238,7 +246,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
                                         getApplicationContext(),
                                         e.toString(),
                                         Toast.LENGTH_LONG).show();
-                                createNewUser();
+                                        createNewUser();
                             }
                         }
                     });
@@ -269,6 +277,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
         });
     }
 
+<<<<<<< HEAD
 //    private void startWithCurrentUser() {
 //        //KLLmVL886h
 //        sUserId = ParseUser.getCurrentUser().getObjectId();
@@ -277,6 +286,8 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
 //        editor.commit();
 //    }
 
+=======
+>>>>>>> f5545e5185bb1805ac98a8807db409fc2fb0004c
     private void login() {
         //KLLmVL886h
         Intent intent = new Intent(

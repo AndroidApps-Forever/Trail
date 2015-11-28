@@ -16,6 +16,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.trail.Adapters.CustomPhoneListAdapter;
+
 import java.util.ArrayList;
 
 public class ContactsActivity extends AppCompatActivity {
