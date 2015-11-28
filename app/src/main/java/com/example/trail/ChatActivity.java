@@ -6,10 +6,13 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.trail.Adapters.ChatListAdapter;
 import com.parse.FindCallback;
@@ -140,6 +143,25 @@ public class ChatActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_chats1, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id  = item.getItemId();
+
+        System.out.println("ID" + id);
+
+        if(id == R.id.action_find_location){
+            Toast.makeText(getApplicationContext(), "Opening location", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(this, MapsChatActivity.class);
+            startActivity(i);
+        }
+        return super.onOptionsItemSelected(item);
     }
     @Override
     protected void onPause() {
