@@ -172,7 +172,7 @@ public class MapsGeofenceActivity extends AppCompatActivity implements OnMapRead
     public void onMapLongClick(LatLng point) {
         int count=0;
         count = HOLDER.GEOFENCE_COUNT;
-        if(count < 10) {
+        if(count < 5) {
             HOLDER.GEOFENCE_COUNT++ ;
             count = HOLDER.GEOFENCE_COUNT;
             System.out.println(count);
@@ -180,10 +180,10 @@ public class MapsGeofenceActivity extends AppCompatActivity implements OnMapRead
             mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
             /*---- Adding marker -----*/
-            mMap.addMarker(new MarkerOptions()
+            HOLDER.markers.add(count, mMap.addMarker(new MarkerOptions()
                     .position(point)
                     .title("Geofence_" + count + " Added").snippet(point.toString())
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(point));
 
             //setting circle

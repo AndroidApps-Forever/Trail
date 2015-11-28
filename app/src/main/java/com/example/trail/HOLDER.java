@@ -1,8 +1,11 @@
 package com.example.trail;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.plus.model.people.Person;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -24,6 +27,8 @@ public final class HOLDER {
     public static final String GEOFENCES_ADDED_KEY = PACKAGE_NAME + ".GEOFENCES_ADDED_KEY";
 
     public static Person user;
+
+    public static ArrayList<Marker> markers = new ArrayList<Marker>(5) ;
 
     /* Expiration in Days -----  7 days */
     public static final long GEOFENCE_EXPIRATION_IN_DAYS = 7;
