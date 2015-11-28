@@ -82,9 +82,9 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         setupNavigationView();
         setupToolbar();
 
-        /*if (ParseUser.getCurrentUser() != null) { // start with existing user
+        if (ParseUser.getCurrentUser() != null) { // start with existing user
             startWithCurrentUser();
-        } else { // If not logged in, login as a new anonymous user
+        }/* else { // If not logged in, login as a new anonymous user
             login();
         }*/
 
@@ -115,6 +115,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
     private void startWithCurrentUser() {
         sUserId = ParseUser.getCurrentUser().getObjectId();
+        System.out.println("Current User Id: " + sUserId);
         setUpUserList();
     }
 

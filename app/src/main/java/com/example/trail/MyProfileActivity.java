@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.example.trail.Adapters.CustomListAdapter;
+
 import java.util.ArrayList;
 
 public class MyProfileActivity extends AppCompatActivity {

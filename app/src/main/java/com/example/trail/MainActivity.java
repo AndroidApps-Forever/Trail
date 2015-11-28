@@ -27,6 +27,7 @@ import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.Geofence;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 import com.parse.FindCallback;
@@ -161,6 +162,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
             Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
             mGoogleApiClient.disconnect();
         }
+        System.out.println("Logout!");
     }
 
     private void signInWithGplus() {
@@ -232,13 +234,17 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
             //signIn to get the current user
             // Retrieve the text entered from the EditText
             usernametxt = personName;
-            passwordtxt = "Password";
-
+            passwordtxt = "password";
+            System.out.println("userName: " + usernametxt);
             // Send data to Parse.com for verification
             ParseUser.logInInBackground(usernametxt, passwordtxt,
                     new LogInCallback() {
                         public void done(ParseUser user, ParseException e) {
+                            System.out.println("user: " + user);
+                            //System.out.println("exception: " + e.toString());
                             if (user != null) {
+                                sUserId = ParseUser.getCurrentUser().getObjectId();
+                                System.out.println("Current User Id: " + sUserId);
                                 // If user exist and authenticated, send user to Welcome.class
                                 Intent intent = new Intent(
                                         MainActivity.this,
@@ -251,9 +257,9 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
                             } else {
                                 Toast.makeText(
                                         getApplicationContext(),
-                                        "No such user exist, please signup",
+                                        e.toString(),
                                         Toast.LENGTH_LONG).show();
-                                createNewUser();
+                                        createNewUser();
                             }
                         }
                     });
@@ -261,12 +267,11 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
     }
 
     private void createNewUser() {
-        String id = currentPerson.getId();
+        System.out.println("Creating new user");
         ParseUser user = new ParseUser();
         user.setUsername(personName);
         user.setEmail(email);
-        user.setPassword("Halluleya");
-        user.setObjectId(id);
+        user.setPassword("password");
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
                 if (e == null) {
@@ -278,6 +283,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
                     Toast.makeText(getApplicationContext(),
                             "Sign up Error", Toast.LENGTH_LONG)
                             .show();
+                    signOutFromGplus();
                 }
             }
         });
@@ -289,19 +295,5 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
         SharedPreferences.Editor editor = sp.edit();
         editor.putString("sUserId", sUserId);
         editor.commit();
-    }
-
-    private void login() {
-        ParseAnonymousUtils.logIn(new LogInCallback() {
-            @Override
-            public void done(ParseUser user, ParseException e) {
-                if (e != null) {
-                    Log.d(TAG, "Anonymous login failed: " + e.toString());
-                } else {
-                    System.out.println(ParseUser.getCurrentUser().getObjectId());
-                    startWithCurrentUser();
-                }
-            }
-        });
     }
 }

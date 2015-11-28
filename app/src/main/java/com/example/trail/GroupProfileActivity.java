@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.example.trail.Adapters.CustomListAdapter;
+
 public class GroupProfileActivity extends AppCompatActivity {
 
     private ImageView roundImageView;
