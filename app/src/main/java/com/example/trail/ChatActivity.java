@@ -52,6 +52,9 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //Set the chat wala icon not clickable
+
+
         Intent i = getIntent();
         rUserId = i.getStringExtra("Receiver_id");
         sUserId = i.getStringExtra("Sender_id");
@@ -161,6 +164,12 @@ public class ChatActivity extends AppCompatActivity {
             Intent i = new Intent(this, MapsChatActivity.class);
             startActivity(i);
         }
+        if(id == R.id.action_find_location){
+            Toast.makeText(getApplicationContext(), "Opening location", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(this, MapsChatActivity.class);
+            startActivity(i);
+        }
+
         return super.onOptionsItemSelected(item);
     }
     @Override

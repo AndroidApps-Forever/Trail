@@ -182,7 +182,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 int id = menuItem.getItemId();
-                if (id == R.id.edit_profile) {
+                /*if (id == R.id.edit_profile) {
                     Log.d("Item Click : ", menuItem.getTitle().toString());
                     Toast.makeText(getApplicationContext(), "Edit Profile", Toast.LENGTH_SHORT);
                     drawerLayout.closeDrawers();
@@ -195,13 +195,13 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                     Intent i = new Intent(HomeScreen.this, SettingsActivity.class);
                     startActivity(i);
                     return true;
-                }
+                }*/
                 if (id == R.id.about) {
                     Log.d("Item Click : ", menuItem.getTitle().toString());
                     Toast.makeText(getApplicationContext(), "About", Toast.LENGTH_SHORT).show();
-                    drawerLayout.closeDrawers();
                     Intent i = new Intent(HomeScreen.this, AboutActivity.class);
                     startActivity(i);
+                    drawerLayout.closeDrawers();
                     return true;
                 }
                 if (id == R.id.createGeofence){
@@ -213,14 +213,10 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 if(id == R.id.sign_out){
                     System.out.println("Logout");
                     Toast.makeText(getApplicationContext(), "Clicked on logout", Toast.LENGTH_SHORT).show();
-                    if (mGoogleApiClient.isConnected()) {
-                        Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
-                        mGoogleApiClient.disconnect();
-                        mGoogleApiClient.connect();
-                        System.err.println("LOG OUT ^^^^^^^^^ SUCESS");
-                        finish();
-                    }
-                    System.out.println("");
+                    Intent i = new Intent(HomeScreen.this, MainActivity.class);
+                    startActivity(i);
+                    //mGoogleApiClient.connect();
+                    System.err.println("LOG OUT ^^^^^^^^^ SUCESS");
                     drawerLayout.closeDrawers();
                     return true;
                 }
@@ -254,7 +250,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_chats, menu);
+        getMenuInflater().inflate(R.menu.menu_homescreen, menu);
         return true;
     }
 

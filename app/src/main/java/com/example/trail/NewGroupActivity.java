@@ -37,7 +37,7 @@ public class NewGroupActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_new_group, menu);
+        //getMenuInflater().inflate(R.menu.menu_new_group, menu);
        button = (Button) findViewById(R.id.adImg);
         button.setOnClickListener(new View.OnClickListener() {
             @Override

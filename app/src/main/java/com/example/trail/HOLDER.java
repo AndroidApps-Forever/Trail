@@ -28,7 +28,7 @@ public final class HOLDER {
 
     public static Person user;
 
-    public static ArrayList<Marker> markers = new ArrayList<Marker>(5) ;
+    public static ArrayList<Marker> markers = new ArrayList<>(5);
 
     /* Expiration in Days -----  7 days */
     public static final long GEOFENCE_EXPIRATION_IN_DAYS = 7;

@@ -209,6 +209,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
                 editor.putString("profile", personGooglePlusProfile);
                 editor.putString("currentEmail", email);
                 editor.apply();
+                signOutFromGplus();
                 // I check in the data base if(my email id of user exist in data base)
                 checkUser();
 
@@ -246,10 +247,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
                                 sUserId = ParseUser.getCurrentUser().getObjectId();
                                 System.out.println("Current User Id: " + sUserId);
                                 // If user exist and authenticated, send user to Welcome.class
-                                Intent intent = new Intent(
-                                        MainActivity.this,
-                                        HomeScreen.class);
-                                startActivity(intent);
+                                login();
                                 Toast.makeText(getApplicationContext(),
                                         "Successfully Logged in",
                                         Toast.LENGTH_LONG).show();
@@ -279,6 +277,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
                     Toast.makeText(getApplicationContext(),
                             "Successfully Signed up.",
                             Toast.LENGTH_LONG).show();
+                    login();
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Sign up Error", Toast.LENGTH_LONG)
@@ -289,11 +288,11 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
         });
     }
 
-    private void startWithCurrentUser() {
+    private void login() {
         //KLLmVL886h
-        sUserId = ParseUser.getCurrentUser().getObjectId();
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putString("sUserId", sUserId);
-        editor.commit();
+        Intent intent = new Intent(
+                MainActivity.this,
+                HomeScreen.class);
+        startActivity(intent);
     }
 }

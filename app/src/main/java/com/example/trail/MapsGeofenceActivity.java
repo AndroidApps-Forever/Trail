@@ -162,11 +162,22 @@ public class MapsGeofenceActivity extends AppCompatActivity implements OnMapRead
         });
         mMap.moveCamera(CameraUpdateFactory.newLatLng(point));
         mMap.setOnMapLongClickListener(this);
+
+       /* if(HOLDER.markers!=null)
+        {
+            int i;
+            for(i=0;i<5;i++)
+            {
+                HOLDER.markers.get(i).getPosition();
+                mMap.addMarker();
+            }
+        }*/
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     //public static Circle circle;
-    private Stack<Circle> circleStack = new Stack<Circle>();
+
+    private ArrayList<Circle> circles = new ArrayList<>(5);
 
     @Override
     public void onMapLongClick(LatLng point) {
@@ -180,7 +191,8 @@ public class MapsGeofenceActivity extends AppCompatActivity implements OnMapRead
             mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
             /*---- Adding marker -----*/
-            HOLDER.markers.add(count, mMap.addMarker(new MarkerOptions()
+            /*HOLDER.markers.add(count, */
+            HOLDER.markers.add(0, mMap.addMarker(new MarkerOptions()
                     .position(point)
                     .title("Geofence_" + count + " Added").snippet(point.toString())
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))));
@@ -196,7 +208,7 @@ public class MapsGeofenceActivity extends AppCompatActivity implements OnMapRead
             //ADDING THE CIRCLE OF THE RESPECTIVE RADIUS ON THE MAP
             Circle circle;
             circle = mMap.addCircle(circleOptions);
-            circleStack.push(circle);
+            circles.add(0,circle);
 
             //---- Calling add Geofence function ---------------------------------------------------------
             HOLDER.GEOFENCES.put("Geofence_" + count , point);
@@ -211,8 +223,9 @@ public class MapsGeofenceActivity extends AppCompatActivity implements OnMapRead
             @Override
             public boolean onMarkerClick(Marker marker) {
                 System.out.println("Point already had geofence");
+                int index = HOLDER.markers.indexOf(marker);
                 marker.remove();
-                Circle c = circleStack.pop();
+                Circle c = circles.get(index);
                 c.remove();
                 removeGeofencesHandler();
                 HOLDER.GEOFENCE_COUNT--;

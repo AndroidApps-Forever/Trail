@@ -1,15 +1,20 @@
 package com.example.trail;
 
+import android.content.Intent;
 import android.content.IntentSender;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -23,7 +28,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsChatActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener,
+public class MapsChatActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, LocationListener{
 
@@ -38,7 +43,7 @@ public class MapsChatActivity extends FragmentActivity implements OnMapReadyCall
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps_chat);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setupToolbar();
 
         if (mMap != null) {
             System.out.println("Enabling my the location");
@@ -62,7 +67,44 @@ public class MapsChatActivity extends FragmentActivity implements OnMapReadyCall
                 .setInterval(10 * 1000)        // 10 seconds, in milliseconds
                 .setFastestInterval(1 * 1000); // 1 second, in milliseconds
     }
+    public void setupToolbar(){
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if(toolbar!=null) {
+            setSupportActionBar(toolbar);
+        }
+        // Show menu icon
+        final ActionBar ab = getSupportActionBar();
+        ab.setHomeButtonEnabled(true);
+        ab.setDisplayHomeAsUpEnabled(true);
 
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_maps, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id  = item.getItemId();
+
+        System.out.println("ID" + id);
+
+        switch (id) {
+            case android.R.id.home:
+                //Write your logic here
+                this.finish();
+                return true;
+            case R.id.action_chat:
+                Toast.makeText(getApplicationContext(), "Opening chat", Toast.LENGTH_SHORT).show();
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+
+       // return super.onOptionsItemSelected(item);
+    }
     @Override
     protected void onResume() {
         super.onResume();
@@ -102,6 +144,7 @@ public class MapsChatActivity extends FragmentActivity implements OnMapReadyCall
         Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if(mMap != null) {
             if (location == null) {
+                //if i dont have previous location then I ask the gps.
                 LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
             } else {
                 handleNewLocation(location);
