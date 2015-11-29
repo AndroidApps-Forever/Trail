@@ -87,21 +87,13 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         setupNavigationView();
         setupToolbar();
 
-<<<<<<< HEAD
         if (ParseUser.getCurrentUser() != null) {
          // start with existing user
             startWithCurrentUser();
         }
 // else { // If not logged in, login as a new anonymous user
 //            login();
-//        }
-=======
-        if (ParseUser.getCurrentUser() != null) { // start with existing user
-            startWithCurrentUser();
-        }/* else { // If not logged in, login as a new anonymous user
-            login();
-        }*/
->>>>>>> f5545e5185bb1805ac98a8807db409fc2fb0004c
+//
 
         //handler.postDelayed(runnable, 100);
     }
@@ -130,12 +122,9 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
     private void startWithCurrentUser() {
         sUserId = ParseUser.getCurrentUser().getObjectId();
-<<<<<<< HEAD
         HOLDER.sUserId = sUserId;
         //Call NewChatsActivity.java
-=======
         System.out.println("Current User Id: " + sUserId);
->>>>>>> f5545e5185bb1805ac98a8807db409fc2fb0004c
         setUpUserList();
     }
 

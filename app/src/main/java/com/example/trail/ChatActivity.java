@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -35,7 +36,7 @@ public class ChatActivity extends AppCompatActivity {
 
     public static final String USER_ID_KEY = "userId";
     private static final int MAX_CHAT_MESSAGES_TO_SHOW = 50;
-
+    Toolbar toolbar;
     private EditText etMessage;
     private Button btSend;
     private ListView lvChat;
@@ -73,20 +74,6 @@ public class ChatActivity extends AppCompatActivity {
         receiveMessage();
         // Run the runnable object defined every 100ms
         handler.postDelayed(runnable, 1000);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        switch (id) {
-            case android.R.id.home:
-                //Write your logic here
-                this.finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     private void startWithCurrentUser() {
@@ -182,10 +169,9 @@ public class ChatActivity extends AppCompatActivity {
 
         System.out.println("ID" + id);
 
-        if(id == R.id.action_find_location){
-            Toast.makeText(getApplicationContext(), "Opening location", Toast.LENGTH_SHORT).show();
-            Intent i = new Intent(this, MapsChatActivity.class);
-            startActivity(i);
+        if(id == R.id.home){
+            this.finish();
+            return true;
         }
         if(id == R.id.action_find_location){
             Toast.makeText(getApplicationContext(), "Opening location", Toast.LENGTH_SHORT).show();

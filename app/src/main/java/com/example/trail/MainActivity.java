@@ -17,12 +17,6 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
-<<<<<<< HEAD
-=======
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.Geofence;
->>>>>>> f5545e5185bb1805ac98a8807db409fc2fb0004c
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 import com.parse.LogInCallback;
@@ -277,17 +271,6 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
         });
     }
 
-<<<<<<< HEAD
-//    private void startWithCurrentUser() {
-//        //KLLmVL886h
-//        sUserId = ParseUser.getCurrentUser().getObjectId();
-//        SharedPreferences.Editor editor = sp.edit();
-//        editor.putString("sUserId", sUserId);
-//        editor.commit();
-//    }
-
-=======
->>>>>>> f5545e5185bb1805ac98a8807db409fc2fb0004c
     private void login() {
         //KLLmVL886h
         Intent intent = new Intent(
