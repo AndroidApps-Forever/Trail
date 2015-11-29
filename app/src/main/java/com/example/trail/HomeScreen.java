@@ -28,7 +28,6 @@ import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListe
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.plus.Plus;
 import com.parse.FindCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseAnonymousUtils;
@@ -93,7 +92,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         }
 // else { // If not logged in, login as a new anonymous user
 //            login();
-//
+
 
         //handler.postDelayed(runnable, 100);
     }

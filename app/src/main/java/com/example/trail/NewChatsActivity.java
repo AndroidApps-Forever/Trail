@@ -19,7 +19,7 @@ public class NewChatsActivity extends AppCompatActivity {
         //android.support.v7.app.ActionBar actionBar ;
         Toolbar toolbar;
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        if(toolbar!=null) {
+        if (toolbar != null) {
             setSupportActionBar(toolbar);
         }    // Show menu icon
         final ActionBar ab = getSupportActionBar();
@@ -58,14 +58,12 @@ public class NewChatsActivity extends AppCompatActivity {
     }
 
 
-
     public void newpersonal(View view) {
-        Intent personalchat=new Intent(this,FetchAllContacts.class);
+        Intent personalchat = new Intent(this, FetchAllContacts.class);
         startActivity(personalchat);
     }
-
+}
 //    public void newgroup(View view) {
 //        Intent groupchat=new Intent(this,NewGroupActivity.class);
 //        startActivity(groupchat);
 //    }
-}

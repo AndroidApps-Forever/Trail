@@ -52,15 +52,13 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if(toolbar!=null) {
             setSupportActionBar(toolbar);
         }    // Show menu icon
         final ActionBar ab = getSupportActionBar();
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         //Set the chat wala icon not clickable
         Intent i = getIntent();
         rUserId = i.getStringExtra("Receiver_id");
@@ -173,10 +171,10 @@ public class ChatActivity extends AppCompatActivity {
             this.finish();
             return true;
         }
-        if(id == R.id.action_find_location){
-            Toast.makeText(getApplicationContext(), "Opening location", Toast.LENGTH_SHORT).show();
-            Intent i = new Intent(this, MapsChatActivity.class);
-            startActivity(i);
+        if(id == android.R.id.home)
+        {
+            this.finish();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
