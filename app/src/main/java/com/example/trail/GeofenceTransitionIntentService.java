@@ -78,10 +78,10 @@ public class GeofenceTransitionIntentService {
                 // Send notification and log the transition details whenever the transition occurs.
                 if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER) {
                     //We have entered the geofence
-                    updateFlag();
+                    //updateFlag();
                     //startSamplingAccelerometer();
-                } else
-                    updateFlag();
+                } else{}
+                    //updateFlag();
 
             } else {
                 // Log the error.
@@ -89,7 +89,7 @@ public class GeofenceTransitionIntentService {
             }
         }
 
-        public void updateFlag() {
+        /*public void updateFlag() {
             //Update the value of
             if (HOLDER.FLAG == 0) {
                 //We have entered the Geofence
@@ -97,7 +97,7 @@ public class GeofenceTransitionIntentService {
                 System.out.print("Flag Updated --------------------" + HOLDER.FLAG + "--------------------------");
             } else
                 HOLDER.FLAG = 0;
-        }
+        }*/
 
         private String getGeofenceTransitionDetails(
                 Context context,

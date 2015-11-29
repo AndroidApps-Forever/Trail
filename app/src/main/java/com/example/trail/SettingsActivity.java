@@ -11,7 +11,7 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        //setContentView(R.layout.activity_settings);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
        // setSupportActionBar(toolbar);
 
@@ -24,9 +24,9 @@ public class SettingsActivity extends AppCompatActivity {
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
 
-        getFragmentManager().beginTransaction()
+        /*getFragmentManager().beginTransaction()
                 .replace(R.id.content, new SettingsFragment())
-                .commit();
+                .commit();*/
 
 
     }

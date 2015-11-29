@@ -30,7 +30,7 @@ public class ContactsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_contacts);
+        //setContentView(R.layout.content_contacts);
 
         fetchContacts(this.getContentResolver());
 
@@ -112,7 +112,7 @@ public class ContactsActivity extends AppCompatActivity {
         phones.close();
 
         CustomPhoneListAdapter adapter=new CustomPhoneListAdapter(this, nameOfContacts, phoneNoOfContacts);
-        list=(ListView)findViewById(R.id.listView2);
+        //list=(ListView)findViewById(R.id.listView2);
         list.setAdapter(adapter);
     }
 

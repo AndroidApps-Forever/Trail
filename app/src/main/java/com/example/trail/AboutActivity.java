@@ -51,7 +51,7 @@ public class AboutActivity extends AppCompatActivity {
     }
 
     private void setValuesofText() {
-        aboutTitle.setText("About Smoothie");
+        aboutTitle.setText("About Trail");
         aboutText.setText("Trail is app following the concept of \"Follow your friends " +
                 "where-ever they go\". The app was developed as the course project under the " +
                 "supervision of Prof. Vinayak Nayak in the course Mobile Computing.");

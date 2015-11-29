@@ -4,6 +4,9 @@
     tools:context=".ChatsActivity" >
 
     <group android:checkableBehavior="all">
+        <item android:id="@+id/me"
+            android:icon="@drawable/ic_person_black"
+            android:title="My Profile"/>
         <item
             android:id="@+id/about"
             android:icon="@drawable/ic_info_black"

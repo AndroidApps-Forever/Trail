@@ -178,7 +178,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
 
                 email = Plus.AccountApi.getAccountName(mGoogleApiClient);
 
-                HOLDER.user = currentPerson;
+                //HOLDER.user = currentPerson;
                 Log.e(TAG, "Name: " + personName + ", plusProfile: "
                         + personGooglePlusProfile + ", email: " + email
                         + ", Image: " + personPhotoUrl);
@@ -190,6 +190,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Conn
                 editor.putString("profile", personGooglePlusProfile);
                 editor.putString("currentEmail", email);
                 editor.apply();
+                //sp.getString("photoUrl", null);
                 signOutFromGplus();
                 // I check in the data base if(my email id of user exist in data base)
                 checkUser();

@@ -19,7 +19,7 @@ public final class HOLDER {
 
     public static int GEOFENCE_COUNT =0;
 
-    public static final String PACKAGE_NAME = "com.example.anjali.geofence";
+    public static final String PACKAGE_NAME = "com.example.trail";
 
     public static final String SHARED_PREFERENCES_NAME = PACKAGE_NAME + ".SHARED_PREFERENCES_NAME";
 
@@ -28,36 +28,29 @@ public final class HOLDER {
     public static Person user;
     public static String sUserId;
 
-    public static ArrayList<Marker> markers = new ArrayList<>(5);
+    public static ArrayList<LatLng> GEOFENCES = new ArrayList<LatLng>(5);
 
 
-    /* Expiration in Days -----  7 days */
+   /* *//* Expiration in Days -----  7 days *//*
     public static final long GEOFENCE_EXPIRATION_IN_DAYS = 7;
-    /*Expiration in Hours */
+    *//*Expiration in Hours *//*
     public static final long GEOFENCE_EXPIRATION_IN_HOURS = GEOFENCE_EXPIRATION_IN_DAYS * 24;
 
-    /* Expiration in Millisecond */
+    *//* Expiration in Millisecond *//*
     public static final long GEOFENCE_EXPIRATION_IN_MILLISECONDS =
             GEOFENCE_EXPIRATION_IN_HOURS * 60 * 60 * 1000;
 
-    /*Radius of Geofence in Meters*/
+    *//*Radius of Geofence in Meters*//*
     public static final float GEOFENCE_RADIUS_IN_METERS = 500; // 0.5 Km
 
-    public static int FLAG = 0;
+    public static int FLAG = 0;*/
     /**
      * Map for storing information about metro Station in the Okhla area.
      */
-    public static HashMap<String, LatLng> GEOFENCES = new HashMap<String, LatLng>();
+    /*public static HashMap<String, LatLng> GEOFENCES = new HashMap<String, LatLng>();
     static {
         GEOFENCES.put("Academic block", new LatLng(28.5444498,77.2726199));
-    }
-
-
-    // Chat ki cheezei
-    /**
-     * Base URL of the Demo Server (such as http://my_host:8080/gcm-demo)
-     */
-    public static String SERVER_URL = "";//TODO provide server url e.g. http://demoserver.appspot.com
+    }*/
 
     /**
      * Google API project id registered to use GCM.

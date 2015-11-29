@@ -55,11 +55,10 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
     //private ListView allChats;
     private static final String TAG = ChatActivity.class.getName();
     private static String sUserId;
-    private ArrayList<ParseUser> mUsers;
+    private ArrayList<ParseUser> mUsers = new ArrayList<>();;
     private GoogleApiClient mGoogleApiClient ;
     boolean mSignOutClicked;
 
-    public static final String USER_ID_KEY = "userId";
     private ListView lvChat;
     HomeScreenListAdapter mAdapter;
 
@@ -78,7 +77,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent newchatsdialog = new Intent(HomeScreen.this, NewChatsActivity.class);
+                Intent newchatsdialog = new Intent(HomeScreen.this, FetchAllContacts.class);
                 startActivity(newchatsdialog);
             }
         });
@@ -87,17 +86,16 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         setupToolbar();
 
         if (ParseUser.getCurrentUser() != null) {
+            System.out.println("getting current user!");
          // start with existing user
             startWithCurrentUser();
         }
-// else { // If not logged in, login as a new anonymous user
-//            login();
-
 
         //handler.postDelayed(runnable, 100);
     }
 
     private void buildGoogleApiClient() {
+        System.out.println("Building client");
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -105,38 +103,20 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 .build();
     }
 
-    private void login() {
-        ParseAnonymousUtils.logIn(new LogInCallback() {
-            @Override
-            public void done(ParseUser user, ParseException e) {
-                if (e != null) {
-                    Log.d(TAG, "Anonymous login failed: " + e.toString());
-                } else {
-                    System.out.println(ParseUser.getCurrentUser().getObjectId());
-                    startWithCurrentUser();
-                }
-            }
-        });
-    }
-
     private void startWithCurrentUser() {
         sUserId = ParseUser.getCurrentUser().getObjectId();
         HOLDER.sUserId = sUserId;
-        //Call NewChatsActivity.java
         System.out.println("Current User Id: " + sUserId);
         setUpUserList();
     }
 
     private void setUpUserList() {
         lvChat = (ListView) findViewById(R.id.lvChats);
-        mUsers = new ArrayList<>();
         lvChat.setTranscriptMode(1);
         receiveUser();
         System.out.println("Till here...............");
         mAdapter = new HomeScreenListAdapter(HomeScreen.this, sUserId, mUsers);
-        System.out.println("Till here 2...............");
         lvChat.setAdapter(mAdapter);
-        System.out.println("Till here 3...............");
         lvChat.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -158,15 +138,6 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         super.onResume();
         setUpUserList();
     }
-
-    /*private Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-        System.out.println("Refreshing user");
-        refreshUser();
-        //handler.postDelayed(this, 1000);
-        }
-    };*/
 
     private void refreshUser() {
 
@@ -206,13 +177,12 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                         }
                     }
                 }
-                Iterator i = hset.iterator();
-                while (i.hasNext()) {
-                    personId.add(i.next() + "");
+                for (Object aHset : hset) {
+                    personId.add(aHset + "");
                 }
             }
         });
-
+        System.out.println("Person Ids: " + personId);
         ParseQuery<ParseUser> query = ParseQuery.getQuery(ParseUser.class);
         System.out.println("Excuting query");
         query.orderByDescending("updatedAt");
@@ -244,20 +214,13 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 int id = menuItem.getItemId();
-                /*if (id == R.id.edit_profile) {
-                    Log.d("Item Click : ", menuItem.getTitle().toString());
-                    Toast.makeText(getApplicationContext(), "Edit Profile", Toast.LENGTH_SHORT);
+                if(id == R.id.me){
+                    Toast.makeText(getApplicationContext(), "Opening My profile", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(HomeScreen.this, MyProfile.class);
+                    startActivity(i);
                     drawerLayout.closeDrawers();
                     return true;
                 }
-                if (id == R.id.settings) {
-                    Log.d("Item Click : ", menuItem.getTitle().toString());
-                    Toast.makeText(getApplicationContext(), "Change Settings", Toast.LENGTH_SHORT);
-                    drawerLayout.closeDrawers();
-                    Intent i = new Intent(HomeScreen.this, SettingsActivity.class);
-                    startActivity(i);
-                    return true;
-                }*/
                 if (id == R.id.about) {
                     Log.d("Item Click : ", menuItem.getTitle().toString());
                     Toast.makeText(getApplicationContext(), "About", Toast.LENGTH_SHORT).show();
@@ -276,10 +239,11 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                     System.out.println("Logout");
                     Toast.makeText(getApplicationContext(), "Clicked on logout", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(HomeScreen.this, MainActivity.class);
-                    startActivity(i);
                     //mGoogleApiClient.connect();
                     System.err.println("LOG OUT ^^^^^^^^^ SUCESS");
                     drawerLayout.closeDrawers();
+                    ParseUser.logOut();
+                    startActivity(i);
                     return true;
                 }
                 else {
@@ -333,6 +297,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
             Intent i = new Intent(this, MapsChatActivity.class);
             startActivity(i);
         }
+
         return super.onOptionsItemSelected(item);
     }
 

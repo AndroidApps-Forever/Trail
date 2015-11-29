@@ -67,7 +67,7 @@ public class MapsGeofenceActivity extends AppCompatActivity implements OnMapRead
     private static final int geofenceRadius=500;
     protected ArrayList<Geofence> mGeofenceList;
     private GoogleApiClient mLocationClient ;
-    List<LatLng> geofenceLocations = new ArrayList<LatLng>(10);
+    List<Marker> Markers = new ArrayList<Marker>(5);
 
     ///Buttons called when clicked on the marker///////////////////////////////////////////////////////////
     private Button mAddGeofencesButton;
@@ -105,7 +105,7 @@ public class MapsGeofenceActivity extends AppCompatActivity implements OnMapRead
         // Get the value of mGeofencesAdded from SharedPreferences. Set to false as a default.
         mGeofencesAdded = mSharedPreferences.getBoolean(HOLDER.GEOFENCES_ADDED_KEY, false);
 
-        populateGeofenceList();
+        //populateGeofenceList();
         buildLocationApiClient();
 
     }
@@ -163,15 +163,31 @@ public class MapsGeofenceActivity extends AppCompatActivity implements OnMapRead
         mMap.moveCamera(CameraUpdateFactory.newLatLng(point));
         mMap.setOnMapLongClickListener(this);
 
-       /* if(HOLDER.markers!=null)
-        {
-            int i;
-            for(i=0;i<5;i++)
-            {
-                HOLDER.markers.get(i).getPosition();
-                mMap.addMarker();
+        if(HOLDER.GEOFENCES != null){
+            int count = 0;//HOLDER.GEOFENCE_COUNT;
+            for (LatLng p:HOLDER.GEOFENCES) {
+                mMap.addMarker(new MarkerOptions()
+                        .position(p)
+                        .title("Geofence_" + count++ + " Added").snippet(p.toString())
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
             }
-        }*/
+            mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(Marker marker) {
+                    System.out.println("Point already had geofence");
+                    LatLng m = marker.getPosition();
+                    marker.remove();
+                    //Circle c = circles.get(index);
+                    //c.remove();
+                    //removeGeofencesHandler();
+                    HOLDER.GEOFENCES.remove(m);
+                    HOLDER.GEOFENCE_COUNT--;
+                    System.out.println("Geofence count------: " + HOLDER.GEOFENCE_COUNT);
+                    return false;
+                }
+            });
+        }
+        // I want to make markers of the all the locations already i long clicked on
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -192,30 +208,34 @@ public class MapsGeofenceActivity extends AppCompatActivity implements OnMapRead
 
             /*---- Adding marker -----*/
             /*HOLDER.markers.add(count, */
-            HOLDER.markers.add(0, mMap.addMarker(new MarkerOptions()
+            //System.out.println("Geofences: " + HOLDER.GEOFENCES);
+            HOLDER.GEOFENCES.add(point);
+            mMap.addMarker(new MarkerOptions()
                     .position(point)
                     .title("Geofence_" + count + " Added").snippet(point.toString())
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))));
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(point));
 
             //setting circle
             CircleOptions circleOptions = new CircleOptions()
-                    .center(point).radius(HOLDER.GEOFENCE_RADIUS_IN_METERS)
+                    .center(point).radius(5000)
                     .fillColor(0x40ff0000)
                     .strokeColor(Color.TRANSPARENT)
                     .strokeWidth(2);
 
             //ADDING THE CIRCLE OF THE RESPECTIVE RADIUS ON THE MAP
-            Circle circle;
+           /* Circle circle;
             circle = mMap.addCircle(circleOptions);
-            circles.add(0,circle);
+            circles.add(circle);*/
 
             //---- Calling add Geofence function ---------------------------------------------------------
-            HOLDER.GEOFENCES.put("Geofence_" + count , point);
-            addGeofencesHandler();
+            //HOLDER.GEOFENCES.put("Geofence_" + count , point);
+            //addGeofencesHandler();
+
+            System.out.println("Just to check " + HOLDER.GEOFENCES.get(count-1));
         }
         else{
-            Toast.makeText(this, "Only 10 Geofences allowed!", Toast.LENGTH_SHORT);
+            Toast.makeText(this, "Only 5 Geofences allowed!", Toast.LENGTH_SHORT).show();
         }
 
         /*Adding cancellation on marker click*/
@@ -223,12 +243,15 @@ public class MapsGeofenceActivity extends AppCompatActivity implements OnMapRead
             @Override
             public boolean onMarkerClick(Marker marker) {
                 System.out.println("Point already had geofence");
-                int index = HOLDER.markers.indexOf(marker);
+                //int index = Markers.indexOf(marker);
+                LatLng m = marker.getPosition();
                 marker.remove();
-                Circle c = circles.get(index);
-                c.remove();
-                removeGeofencesHandler();
+                //Circle c = circles.get(index);
+                //c.remove();
+                //removeGeofencesHandler();
+                HOLDER.GEOFENCES.remove(m);
                 HOLDER.GEOFENCE_COUNT--;
+                System.out.println("Geofence count------: " + HOLDER.GEOFENCE_COUNT);
                 return false;
             }
         });
@@ -331,7 +354,7 @@ public class MapsGeofenceActivity extends AppCompatActivity implements OnMapRead
     //////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //Creating the geofence around the academic block.
-    public void populateGeofenceList() {
+   /* public void populateGeofenceList() {
         for (Map.Entry<String, LatLng> entry : HOLDER.GEOFENCES.entrySet()) {
             //adding new geofence to object
             mGeofenceList.add(new Geofence.Builder()
@@ -358,7 +381,7 @@ public class MapsGeofenceActivity extends AppCompatActivity implements OnMapRead
                             // Create the geofence.
                     .build());
         }
-    }
+    }*/
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////
 

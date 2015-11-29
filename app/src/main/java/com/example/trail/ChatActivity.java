@@ -98,7 +98,7 @@ public class ChatActivity extends AppCompatActivity {
                 String body = etMessage.getText().toString();
                 receiveMessage();
                 // Use Message model to create new messages now
-                if (body != null) {
+                if (body != "") {
                     Message message = new Message();
                     message.setUserId(sUserId);
                     message.setReceiverId(rUserId);

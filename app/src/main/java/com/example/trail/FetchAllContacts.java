@@ -69,7 +69,7 @@ public class FetchAllContacts extends AppCompatActivity {
     private void setUpUserList() {
         lvChat = (ListView) findViewById(R.id.listView3);
         mUsers = new ArrayList<>();
-        //receiveUser();
+        receiveUser();
         lvChat.setTranscriptMode(1);
 
         mAdapter = new HomeScreenListAdapter(FetchAllContacts.this, sUserId, mUsers);
@@ -89,7 +89,32 @@ public class FetchAllContacts extends AppCompatActivity {
             }
         });
 
-        /*lvChat.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+    }
+
+        private void receiveUser() {
+        // Construct query to execute
+        ParseQuery<ParseUser> query = ParseQuery.getQuery(ParseUser.class);
+        System.out.println("Executing query");
+        query.orderByDescending("updatedAt");
+        query.whereNotEqualTo("objectId", sUserId);
+        // Execute query to fetch all messages from Parse asynchronously
+        // This is equivalent to a SELECT query with SQL
+        query.findInBackground(new FindCallback<ParseUser>() {
+            public void done(List<ParseUser> users, ParseException e) {
+                if (e == null) {
+                    //mMessages.clear();
+                    System.out.println("Adding users");
+                    mUsers.addAll(users);
+                    mAdapter.notifyDataSetChanged(); // update adapter
+                } else {
+                    Log.d("message", "Error: " + e.getMessage());
+                }
+            }
+        });
+    }
+}
+
+/*lvChat.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 //update the list
@@ -147,29 +172,4 @@ public class FetchAllContacts extends AppCompatActivity {
         @Override
         public void onDestroyActionMode(ActionMode mode) {
 
-        }
-
-        private void receiveUser() {
-        // Construct query to execute
-        ParseQuery<ParseUser> query = ParseQuery.getQuery(ParseUser.class);
-        System.out.println("Excuting query");
-        query.orderByDescending("updatedAt");
-        query.whereNotEqualTo("objectId", sUserId);
-        // Execute query to fetch all messages from Parse asynchronously
-        // This is equivalent to a SELECT query with SQL
-        query.findInBackground(new FindCallback<ParseUser>() {
-            public void done(List<ParseUser> users, ParseException e) {
-                if (e == null) {
-                    //mMessages.clear();
-                    System.out.println("Adding users");
-                    mUsers.addAll(users);
-                    mAdapter.notifyDataSetChanged(); // update adapter
-                } else {
-                    Log.d("message", "Error: " + e.getMessage());
-                }
-            }
-        });
-    }
-}}*/
-    }
-}
+        }*/
